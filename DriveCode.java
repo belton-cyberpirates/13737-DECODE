@@ -22,11 +22,18 @@ public class DriveCode extends LinearOpMode {
     final double TURN_MULT = 1.2;
 
     DriveMotors driveMotors;
+    
+    DcMotorEx intake;
+    DcMotorEx pusher;
+    DcMotorEx flywheel;
 
     @Override
     public void runOpMode() throws InterruptedException {
         
         driveMotors = new DriveMotors(this);
+        intake = hardwareMap.get(DcMotorEx.class, "intake");
+        pusher = hardwareMap.get(DcMotorEx.class, "pusher");
+        flywheel = hardwareMap.get(DcMotorEx.class, "flywheel");
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -42,15 +49,11 @@ public class DriveCode extends LinearOpMode {
             double deltaTime = driveMotors.process();
 
             
-            // Gamepad variables
+            // P1 variables
             double leftStickXGP1 = gamepad1.left_stick_x;
             double leftStickYGP1 = gamepad1.left_stick_y;
             double rightStickXGP1 = gamepad1.right_stick_x;
             double rightStickYGP1 = gamepad1.right_stick_y;
-            
-            double leftStickYGP2 = gamepad2.left_stick_y;
-            double rightStickYGP2 = gamepad2.right_stick_y;
-
 
             // Get the speed the bot would go with the joystick pushed all the way
             double maxSpeed = calcMaxSpeed(gamepad1.right_trigger - gamepad1.left_trigger, BASE_SPEED, MAX_BOOST);
@@ -79,7 +82,6 @@ public class DriveCode extends LinearOpMode {
             // strafing is slower than rolling, bump horizontal speed
             rotatedX *= STRAFE_MULT;
             
-            
             if (gamepad1.a) {
                 driveMotors.Move(BotConfig.PICKUP_X, BotConfig.PICKUP_Y, 180);
             }
@@ -92,6 +94,27 @@ public class DriveCode extends LinearOpMode {
                     (-rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front right
                     (-rotatedY + rotatedX + ( turnPower )) * maxSpeed  // Back right
                 );
+            }
+            
+            // P2 variables
+            double leftStickYGP2 = gamepad2.left_stick_y;
+            double rightStickYGP2 = gamepad2.right_stick_y;
+            
+            // Intake
+            intake.setPower(leftStickYGP2);
+            
+            // Pusher
+            pusher.setPower(gamepad2.left_bumper ? -.1 : 0);
+            
+            // Flywheel
+            if (rightStickYGP2 > .5) {
+                flywheel.setVelocity(0);
+            } 
+            else if (rightStickYGP2 < -.5) {
+                flywheel.setVelocity(2500);
+            }
+            else {
+                flywheel.setVelocity(1000);
             }
             
             // Telemetry
