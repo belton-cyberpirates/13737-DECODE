@@ -104,7 +104,15 @@ public class DriveCode extends LinearOpMode {
             intake.setPower(leftStickYGP2 / 2);
             
             // Pusher
-            pusher.setPower(gamepad2.left_bumper ? .75 : 0);
+            if (gamepad2.left_bumper) {
+                pusher.setPower(.75);
+            }
+            else if (gamepad2.right_bumper) {
+                pusher.setPower(.45);
+            }
+            else {
+                pusher.setPower(0);
+            }
             
             // Flywheel
             if (rightStickYGP2 > .5) {
