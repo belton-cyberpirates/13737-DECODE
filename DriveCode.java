@@ -101,17 +101,17 @@ public class DriveCode extends LinearOpMode {
             double rightStickYGP2 = gamepad2.right_stick_y;
             
             // Intake
-            intake.setPower(leftStickYGP2);
+            intake.setPower(leftStickYGP2 / 2);
             
             // Pusher
-            pusher.setPower(gamepad2.left_bumper ? -.1 : 0);
+            pusher.setPower(gamepad2.left_bumper ? .75 : 0);
             
             // Flywheel
             if (rightStickYGP2 > .5) {
                 flywheel.setVelocity(0);
             } 
             else if (rightStickYGP2 < -.5) {
-                flywheel.setVelocity(2500);
+                flywheel.setVelocity(1750);
             }
             else {
                 flywheel.setVelocity(1000);
