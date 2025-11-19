@@ -10,109 +10,64 @@ public class BotConfig {
   public static final String BACK_LEFT_WHEEL_NAME = "back_left";
   public static final String BACK_RIGHT_WHEEL_NAME = "back_right";
   
-  public static final String ARM_LEFT_NAME = "left_arm";
-  public static final String ARM_RIGHT_NAME = "right_arm";
-  
-  public static final String WRIST_NAME = "wrist";
-  public static final String CLAW_LEFT_NAME = "claw_left";
-  public static final String CLAW_RIGHT_NAME = "claw_right";
-  
-  public static final String DIFFERENTIAL_LEFT_NAME = "differential_left";
-  public static final String DIFFERENTIAL_RIGHT_NAME = "differential_right";
-  
-  public static final String DISTANCE_SENSOR_NAME = "dist_sensor";
-  public static final String IMU_NAME = "imu";
+  public static final String INTAKE_NAME = "intake";
+  public static final String PUSHER_NAME = "pusher";
+  public static final String STOPPER_NAME = "stopper";
 
-  public static final String LEFT_ENCODER_NAME = "back_right";
-  public static final String RIGHT_ENCODER_NAME = "back_left";
-  public static final String HORIZONTAL_ENCODER_NAME = "front_right";
+  public static final String LAUNCHER_NAME = "flywheel";
   // ---------------------------------------------------------------------------
 
 
   /*****************************************************************************
   ** DISTANCE CALIBRATION CONSTANTS
   *****************************************************************************/
-  public static final int TILE_LENGTH = 595; // MM
+  public static final int TILE_LENGTH = 875; // TICKS
   // ---------------------------------------------------------------------------
 
 
   /*****************************************************************************
-  ** DRIVE SPEED CONSTANTS
+  ** TELEOP CALIBRATION CONSTANTS
   *****************************************************************************/
+  public static final double BASE_SPEED = .6;
+  
+  public static final double MAX_BOOST = 0.66; // boost maxes out at an additional 60% of the base speed
   public static final double STRAFE_MULT = 1.41;
-  public static final int MAX_DRIVE_VELOCITY = 2750;
-  public static final int ARM_VELOCITY = 3500;
-  public static final int WRIST_VELOCITY = 2000;
+
+  public static final int LAUNCHER_VELOCITY = 1500;
+  public static final int LAUNCHER_FAR_VELOCITY = 2000;
   // ---------------------------------------------------------------------------
 
 
   /*****************************************************************************
-  ** BASE CALIBRATION CONSTANTS
+  ** AUTO CALIBRATION CONSTANTS
   *****************************************************************************/
-  public static final int BAR_X = 645;
-  public static final int BAR_SCORE_X = BAR_X - 300;
-  
-  public static final int PICKUP_X = 650;
-  public static final int PICKUP_Y = -850;
-  
-  public static final int BLOCK_GRAB_X = 338;
-  
-  public static final int PLOW_X = 1200;
-  
-  public static final int BASKET_X = 360;
-  public static final int BASKET_Y = 920;
-  
-  public static final int FIRST_BLOCK_Y = -990;
-  public static final int SECOND_BLOCK_Y = -1240;
-  
-  public static final int THIRD_BLOCK_X = 835;
-  public static final int THIRD_BLOCK_Y = -900;
+  public static final int AUTO_DRIVE_VELOCITY = 1000;
+  public static final int AUTO_PUSHER_VELOCITY = 600;
+  public static final int AUTO_INTAKE_VELOCITY = 600;
+  public static final int AUTO_LAUNCHER_VELOCITY = 1425;
   // ---------------------------------------------------------------------------
 
 
   /*****************************************************************************
-  ** ARM CALIBRATION CONSTANTS
+  ** BASE CONSTANTS
   *****************************************************************************/
-  public static final double BAR_HEIGHT = 0;
-  public static final double BASKET_HEIGHT = 700;
-  public static final double BASKET_SAFE_HEIGHT = 520;
-  public static final double MAX_ARM_HEIGHT = 600;
+  //public static final int PICKUP_X = 650;
+  //public static final int PICKUP_Y = -850;
   // ---------------------------------------------------------------------------
-  
-  
-  /*****************************************************************************
-  ** WRIST CALIBRATION CONSTANTS
-  *****************************************************************************/
-  public static final int WRIST_SPECIMEN_HEIGHT = 1610;
-  public static final int WRIST_SAMPLE_HEIGHT = 1785;
-  public static final int WRIST_SIDE_SAMPLE_HEIGHT = 1950;
-  
-  public static final int WRIST_BAR_HEIGHT = 625;
-  public static final int WRIST_PASSIVE = 550;
-  public static final int WRIST_DUNK_HEIGHT = 800;
-  public static final int WRIST_BASKET_SAFE_HEIGHT = 670;
-  
-  public static final int WRIST_DUNK_TIME = 700;
-  
-  // ---------------------------------------------------------------------------
-  
-  
-  /*****************************************************************************
-  ** CLAW CALIBRATION CONSTANTS
-  *****************************************************************************/
-    public static final double CLAW_LEFT_OPEN_POS = .8;
-    public static final double CLAW_LEFT_FULL_OPEN_POS = 0.6;
-    public static final double CLAW_LEFT_CLOSE_POS = .95;
-    public static final double CLAW_LEFT_HALF_CLOSE_POS = (CLAW_LEFT_OPEN_POS + CLAW_LEFT_CLOSE_POS) / 2;
 
-    public static final double CLAW_RIGHT_OPEN_POS = .2;
-    public static final double CLAW_RIGHT_FULL_OPEN_POS = 0.4;
-    public static final double CLAW_RIGHT_CLOSE_POS = .05;
-    public static final double CLAW_RIGHT_HALF_CLOSE_POS = (CLAW_RIGHT_OPEN_POS + CLAW_RIGHT_CLOSE_POS) / 2;
-    
-    public static final double DIFFERENTIAL_SERVO_DEGREES = 300;
-    
-    public static final int HUMAN_WAIT_TIME = 200;
+
+  /*****************************************************************************
+  ** INTAKE CONSTANTS
+  *****************************************************************************/
+  public static final double STOPPER_OPEN_POS = 0.075;
+  public static final double STOPPER_CLOSE_POS = 0.25;
+  // ---------------------------------------------------------------------------
+
+
+  /*****************************************************************************
+  ** LAUNCHER CONSTANTS
+  *****************************************************************************/
+  public static final int LAUNCHER_VELOCITY_MARGIN = 15;
   // ---------------------------------------------------------------------------
 
 

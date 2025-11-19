@@ -99,7 +99,7 @@ public class DriveMotors {
         the tracking point the Y (strafe) odometry pod is. forward of center is a positive number,
         backwards is a negative number.
          */
-        this.odometry.setOffsets(145, -70, DistanceUnit.MM);
+        this.odometry.setOffsets(-100, -25, DistanceUnit.MM); 
 
         /*
         Set the kind of pods used by your robot. If you're using goBILDA odometry pods, select either
@@ -129,7 +129,7 @@ public class DriveMotors {
          */
         //odo.recalibrateIMU();
         this.odometry.resetPosAndIMU();
-        this.odometry.setPosition( new Pose2D(DistanceUnit.MM, 0, -20, AngleUnit.RADIANS, 0) );
+        this.odometry.setPosition( new Pose2D(DistanceUnit.MM, 0, 0, AngleUnit.DEGREES, -45) );
     }
 
 
@@ -225,6 +225,9 @@ public class DriveMotors {
         auto.telemetry.addData("drivemotors forwardPower", forwardPower);
         auto.telemetry.addData("drivemotors horizontalPower", horizontalPower);
         auto.telemetry.addData("drivemotors anglePower", anglePower);
+        
+        auto.telemetry.addData("device status", odometry.getDeviceStatus());
+        
     }
 
 
