@@ -67,11 +67,11 @@ public abstract class Auto extends LinearOpMode {
             // Process classes
             // Add, remove, modify depending on how your robot works
             driveMotors.process();
+            launcher.process();
             
             // Loop telemetry; updates constantly
             telemetry.addData("X pos", driveMotors.odometry.getPosX(DistanceUnit.MM));
             telemetry.addData("Y pos", driveMotors.odometry.getPosY(DistanceUnit.MM));
-            telemetry.addData("Launcher Velocity", launcher.getVelocity());
 
             telemetry.update();
         }
