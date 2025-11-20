@@ -18,11 +18,11 @@ public class DriveCode extends LinearOpMode {
     // Drive constants
 
     DriveMotors driveMotors;
+    Launcher launcher;
     
     DcMotorEx intake;
     DcMotorEx pusher;
     Servo stopper;
-    DcMotorEx flywheel;
     
     double headingOffset = 0;
     boolean stopperPos = false;
@@ -32,10 +32,11 @@ public class DriveCode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         
         driveMotors = new DriveMotors(this);
+        launcher = new Launcher(this);
+        
         intake = hardwareMap.get(DcMotorEx.class, BotConfig.INTAKE_NAME);
         pusher = hardwareMap.get(DcMotorEx.class, BotConfig.PUSHER_NAME);
         stopper = hardwareMap.get(Servo.class, BotConfig.STOPPER_NAME);
-        flywheel = hardwareMap.get(DcMotorEx.class, BotConfig.LAUNCHER_NAME);
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -48,7 +49,8 @@ public class DriveCode extends LinearOpMode {
             
 
             // Process classes
-            double deltaTime = driveMotors.process();
+            driveMotors.process();
+            launcher.process();
 
             
             // P1 variables
@@ -63,15 +65,7 @@ public class DriveCode extends LinearOpMode {
             double joystickLength = Math.sqrt( Math.pow(gamepad1.right_stick_y, 2) + Math.pow(gamepad1.right_stick_x, 2) );
             double joystickAngle = -Math.atan2(gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI/2;
             
-            double turnPower = 
-            joystickLength > 10 ?
-                driveMotors.imuPidController.PIDControlRadians(
-                    joystickAngle,
-                    driveMotors.heading,
-                    deltaTime
-                )
-            : 
-                -gamepad1.right_stick_x;
+            double turnPower = -gamepad1.right_stick_x;
 
             // Virtually rotate the joystick by the angle of the robot
             double heading = driveMotors.heading - headingOffset;
@@ -103,7 +97,7 @@ public class DriveCode extends LinearOpMode {
             intake.setPower(leftStickYGP2 < 0 ? -leftStickYGP2 : -leftStickYGP2 / 3);
             
             // Pusher
-            pusher.setPower(-leftStickYGP2 / 2);
+            pusher.setPower(-leftStickYGP2 / 1.5);
             // if (gamepad2.left_bumper) {
             //     pusher.setPower(.75);
             // }
@@ -130,13 +124,13 @@ public class DriveCode extends LinearOpMode {
             
             // Flywheel
             if (rightStickYGP2 > .5) {
-                flywheel.setVelocity(0);
+                launcher.SetVelocity(0);
             } 
             else if (rightStickYGP2 < -.5) {
-                flywheel.setVelocity(1500);
+                launcher.SetVelocity(1500);
             }
             else {
-                flywheel.setVelocity(1000);
+                launcher.SetVelocity(1000);
             }
             
             // Telemetry
