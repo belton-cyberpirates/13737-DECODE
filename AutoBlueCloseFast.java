@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.BotConfig;
 import org.firstinspires.ftc.teamcode.Auto;
 
 
-@Autonomous(name = "Blue Close Fast"/*, preselectTeleOp="Your Drive Code Here"*/, group="red")
+@Autonomous(name = "Blue Close Fast"/*, preselectTeleOp="Your Drive Code Here"*/, group="blue")
 //@Disabled
 public class AutoBlueCloseFast extends Auto {
 
@@ -19,7 +19,7 @@ public class AutoBlueCloseFast extends Auto {
             // Get to firing position
             new CloseStopper(this),
             new SpinLauncher(this),
-            new Move(this, -475, -1120, -135),
+            new Move(this, -450, -1120, -135),
             
             // Wait for launcher to get up to speed
             new Wait(this, 500),

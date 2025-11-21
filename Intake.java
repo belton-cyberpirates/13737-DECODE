@@ -36,6 +36,11 @@ public class Intake {
     public void SpinIntake() {
         this.SetIntakeVelocity(BotConfig.AUTO_INTAKE_VELOCITY);
     }
+
+
+    public void SpinIntake(double mult) {
+        this.SetIntakeVelocity((int)(BotConfig.AUTO_INTAKE_VELOCITY * mult));
+    }
   
   
     public void SetPusherVelocity(int velocity) {

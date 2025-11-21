@@ -34,7 +34,7 @@ public class BotConfig {
   public static final double STRAFE_MULT = 1.41;
 
   public static final int LAUNCHER_VELOCITY = 1500;
-  public static final int LAUNCHER_FAR_VELOCITY = 2000;
+  public static final int LAUNCHER_FAR_VELOCITY = 1800;
   // ---------------------------------------------------------------------------
 
 
@@ -43,7 +43,7 @@ public class BotConfig {
   *****************************************************************************/
   public static final int AUTO_DRIVE_VELOCITY = 1000;
   public static final int AUTO_PUSHER_VELOCITY = 600;
-  public static final int AUTO_INTAKE_VELOCITY = 90000;
+  public static final int AUTO_INTAKE_VELOCITY = 2500;
   public static final int AUTO_LAUNCHER_VELOCITY = 1425;
   // ---------------------------------------------------------------------------
 
