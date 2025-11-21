@@ -22,7 +22,7 @@ public class AutoRedFar extends Auto {
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 0, -90+20),
+            new Move(this, 180, 0, -90+22),
             
             // Launch!
             new WaitForLauncher(this),
@@ -41,10 +41,10 @@ public class AutoRedFar extends Auto {
             new StopPusher(this),
             
             // Move to first line
+            new CloseStopper(this),
             new Move(this, 680, -300, 90),
             
             // Intake artifacts
-            new CloseStopper(this),
             new SpinIntake(this),
             new SpinPusher(this), 
             new Move(this, 680, -1100, 90),
@@ -56,7 +56,7 @@ public class AutoRedFar extends Auto {
             new SpinLauncherFast(this),
             
             // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+20), // same as first shooting position
+            new Move(this, 180, 0, -90+22), // same as first shooting position
             
             // Launch!
             new WaitForLauncher(this),
@@ -74,10 +74,10 @@ public class AutoRedFar extends Auto {
             new StopPusher(this),
             
             // Move to second line
+            new CloseStopper(this),
             new Move(this, 1280, -300, 90),
             
             // Intake artifacts
-            new CloseStopper(this),
             new SpinIntake(this),
             new SpinPusher(this), 
             new Move(this, 1250, -1100, 90),
@@ -89,7 +89,7 @@ public class AutoRedFar extends Auto {
             new SpinLauncherFast(this),
             
             // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+20), // same as first shooting position
+            new Move(this, 180, 0, -90+22), // same as first shooting position
             
             // Launch!
             new WaitForLauncher(this),
@@ -105,6 +105,7 @@ public class AutoRedFar extends Auto {
             // End sequence
             
             // Move out of triangle
+            new CloseStopper(this),
             new Move(this, 50, -500, 0),
             
             // ======================== AUTO END ======================== //
