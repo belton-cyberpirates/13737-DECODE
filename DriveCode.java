@@ -117,9 +117,9 @@ public class DriveCode extends LinearOpMode {
             // Light
             light.setPosition(
                 launcher.isAtVelocity() ? 
-                    BotConfig.LIGHT_GOLD /*BotConfig.LIGHT_GREEN*/
+                    BotConfig.LIGHT_GREEN
                 :
-                    BotConfig.LIGHT_PURPLE /*BotConfig.LIGHT_RED*/
+                    BotConfig.LIGHT_RED
             );
             
             // Telemetry
