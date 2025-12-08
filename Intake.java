@@ -67,6 +67,11 @@ public class Intake {
     }
 
 
+    public void SpinPusher(double mult) {
+        this.SetPusherVelocity((int)(BotConfig.AUTO_PUSHER_VELOCITY * mult));
+    }
+
+
     public void OpenStopper() {
         stopper.setPosition(BotConfig.STOPPER_OPEN_POS);
     }
