@@ -175,6 +175,16 @@ public class DriveMotors {
     }
 
 
+    public void DriveAndAim(double forward, double strafe, double targetAngle) {
+        double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, delta);
+
+        double backLeftPower   = (-forward - strafe + anglePower);
+        double frontLeftPower  = (-forward + strafe + anglePower);
+        double frontRightPower = ( forward + strafe + anglePower);
+        double backRightPower  = ( forward - strafe + anglePower);
+    }
+
+
     private void driveWithOdometry(double delta) {
 
         // Get robot movement errors
@@ -302,7 +312,7 @@ public class DriveMotors {
         this.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
   
-  
+
     private void SetZeroBehaviour() {
         this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

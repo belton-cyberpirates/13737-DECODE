@@ -18,11 +18,11 @@ public class DriveCode extends LinearOpMode {
     // Drive constants
 
     DriveMotors driveMotors;
+    Intake intake;
     Launcher launcher;
-    
-    DcMotorEx intake;
-    DcMotorEx pusher;
+
     Servo stopper;
+    Servo light;
     
     double headingOffset = 0;
     boolean stopperPos = false;
@@ -32,11 +32,12 @@ public class DriveCode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         
         driveMotors = new DriveMotors(this);
+        intake = new Intake(this);
         launcher = new Launcher(this);
         
-        intake = hardwareMap.get(DcMotorEx.class, BotConfig.INTAKE_NAME);
-        pusher = hardwareMap.get(DcMotorEx.class, BotConfig.PUSHER_NAME);
         stopper = hardwareMap.get(Servo.class, BotConfig.STOPPER_NAME);
+        
+        light = hardwareMap.get(Servo.class, "light");
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -94,33 +95,13 @@ public class DriveCode extends LinearOpMode {
             double rightStickYGP2 = gamepad2.right_stick_y;
             
             // Intake
-            intake.setPower(leftStickYGP2 < 0 ? -leftStickYGP2 : -leftStickYGP2 / 3);
+            intake.SetPower(leftStickYGP2 < 0 ? -leftStickYGP2 : -leftStickYGP2 / 3);
             
             // Pusher
-            pusher.setPower(-leftStickYGP2 / 1.5);
-            // if (gamepad2.left_bumper) {
-            //     pusher.setPower(.75);
-            // }
-            // else if (gamepad2.right_bumper) {
-            //     pusher.setPower(.45);
-            // }
-            // else {
-            //     pusher.setPower(0);
-            // }
+            intake.SetPusherPower(-leftStickYGP2 / 1.5);
             
             // Stopper
-            stopper.setPosition(gamepad2.right_trigger > 0.5 ? BotConfig.STOPPER_OPEN_POS : BotConfig.STOPPER_CLOSE_POS);
-            // if (gamepad2.right_trigger > 0.5 && !prevRightTrigger) {
-            //     stopperPos = !stopperPos;
-            //     stopper.setPosition(stopperPos ? BotConfig.STOPPER_OPEN_POS : BotConfig.STOPPER_CLOSE_POS);
-            // }
-            // prevRightTrigger = gamepad2.right_trigger > 0.5;
-            // if (gamepad2.right_trigger > .5) {
-            //     stopper.setPosition(BotConfig.STOPPER_OPEN_POS);
-            // }
-            // else if (gamepad2.left_trigger > .5) {
-            //     stopper.setPosition(BotConfig.STOPPER_CLOSE_POS);
-            // }
+            intake.SetStopper(gamepad2.right_trigger > 0.5);
             
             // Flywheel
             if (rightStickYGP2 > .5) {
@@ -132,6 +113,14 @@ public class DriveCode extends LinearOpMode {
             else {
                 launcher.SetVelocity(1000);
             }
+            
+            // Light
+            light.setPosition(
+                launcher.isAtVelocity() ? 
+                    BotConfig.LIGHT_GOLD /*BotConfig.LIGHT_GREEN*/
+                :
+                    BotConfig.LIGHT_PURPLE /*BotConfig.LIGHT_RED*/
+            );
             
             // Telemetry
             // Odometry values

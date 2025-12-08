@@ -17,7 +17,7 @@ public class Launcher {
 
     public DcMotorEx launcher;
     
-    PIDFController launcherPIDFController = new PIDFController(0.0001667, 0.02, 0/*.00001*/, 0/*.0001*/);
+    PIDFController launcherPIDFController = new PIDFController(0.0004, 0.008, 0/*.00001*/, 0/*.0001*/);
 
     int launcherTargetVelocity = 0;
 
