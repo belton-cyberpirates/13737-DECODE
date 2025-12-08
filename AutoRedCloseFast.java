@@ -15,79 +15,97 @@ public class AutoRedCloseFast extends Auto {
     public Action[] getActions() {
         Action[] actions = {
             // ======================= AUTO START ======================= //
-
-            // Get to firing position
-            new CloseStopper(this),
+            // Get ready for launching
+            new OpenStopper(this),
             new SpinLauncher(this),
-            new Move(this, -450, 1120, -45),
             
-            // Wait for launcher to get up to speed
-            new Wait(this, 500),
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            
-            // Engage pusher
-            new SpinPusher(this),
+            // Move to shooting position
+            new Move(this, -450, 1120, -50),
             
             // Launch!
-            new OpenStopper(this),
-            new Wait(this, 500),
-            new CloseStopper(this),
-            new Wait(this, 500),
             new WaitForLauncher(this),
             new Wait(this, 500),
-            
-            // Engage third artifact
-            new SpinIntake(this),
-            new Move(this, -475, 1095, -45),
-            new StopIntake(this),
-            
-            // Launch the rest!
-            new OpenStopper(this),
-            new Wait(this, 2500),
-            new CloseStopper(this),
-            new Wait(this, 750),
-            
-            // Collect second batch
-            new SpinIntake(this),
-            new Move(this, -650, 650, 90),
-            new Move(this, -650, 100, 90),
-            new Wait(this, 1000),
-            new StopIntake(this),
-            
-            // Get to firing position (x2)
-            new CloseStopper(this),
-            new SpinLauncher(this),
-            new Move(this, -450, 1120, -45),
-            
-            // Wait for launcher to get up to speed (x2)
-            new Wait(this, 500),
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            
-            // Engage pusher (x2)
             new SpinPusher(this),
-            
-            // Launch! (x2)
-            new OpenStopper(this),
             new Wait(this, 500),
-            new CloseStopper(this),
-            new Wait(this, 500),
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            
-            // Engage third artifact (x2)
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
             new SpinIntake(this),
-            new Move(this, -475, 1095, -45),
+            
+            new Wait(this, 3000),
+            
+            // Reset
+            new StopLauncher(this),
+            new StopIntake(this),
+            new StopPusher(this),
+            
+            // Move to first line
+            new CloseStopper(this),
+            new Move(this, -680, 800, 90),
+            
+            // Intake artifacts
+            new SpinIntake(this),
+            new SpinPusher(this), 
+            new Move(this, -680, 100, 90),
+            new Wait(this, 750),
+            new StopPusher(this),
             new StopIntake(this),
             
-            // Launch the rest! (x2)
+            // Get ready for launching
             new OpenStopper(this),
-            new Wait(this, 2500),
-            new CloseStopper(this),
-            new Wait(this, 750),
+            new SpinLauncher(this),
             
-            // Evacuate launch zone
+            // Move back to shooting position, while intaking to not lose artifacts
+            new Move(this, -450, 1120, -50), // same as first shooting position
+            
+            // Launch!
+            new WaitForLauncher(this),
+            new Wait(this, 500),
+            new SpinPusher(this),
+            new Wait(this, 500),
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
+            new SpinIntake(this),
+            new Wait(this, 3500),
+            
+            // Reset
+            new StopLauncher(this),
+            new StopIntake(this),
+            new StopPusher(this),
+            
+            // Move to second line
+            new CloseStopper(this),
+            new Move(this, -1350, 800, 90),
+            
+            // Intake artifacts
+            new SpinIntake(this),
+            new SpinPusher(this), 
+            new Move(this, -1375, -100, 90),
+            new Wait(this, 750),
+            new StopPusher(this),
+            new StopIntake(this),
+            
+            // Get ready for launching
+            new OpenStopper(this),
+            new SpinLauncher(this),
+            
+            // Move back to shooting position, while intaking to not lose artifacts
+            new Move(this, -450, 1120, -50), // same as first shooting position
+            
+            // Launch!
+            new WaitForLauncher(this),
+            new Wait(this, 500),
+            new SpinPusher(this),
+            new Wait(this, 500),
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
+            new SpinIntake(this),
+            
+            new Wait(this, 3500),
+            
+            // End sequence
+            
+            // Move out of triangle
+            new CloseStopper(this),
             new Move(this, -650, 300, 90),
             
             // ======================== AUTO END ======================== //

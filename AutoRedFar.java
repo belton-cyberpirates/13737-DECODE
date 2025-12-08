@@ -22,15 +22,15 @@ public class AutoRedFar extends Auto {
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 0, -90+22),
+            new Move(this, 180, 0, -90+18),
             
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
             new Wait(this, 500),
-            new SpinIntake(this, -.2),
-            new Wait(this, 250),
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
             new SpinIntake(this),
             
             new Wait(this, 3000),
@@ -48,23 +48,24 @@ public class AutoRedFar extends Auto {
             new SpinIntake(this),
             new SpinPusher(this), 
             new Move(this, 680, -1100, 90),
-            new Wait(this, 500),
+            new Wait(this, 750),
             new StopPusher(this),
+            new StopIntake(this),
             
             // Get ready for launching
             new OpenStopper(this),
             new SpinLauncherFast(this),
             
             // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+22), // same as first shooting position
+            new Move(this, 180, 0, -90+18), // same as first shooting position
             
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
             new Wait(this, 500),
-            new SpinIntake(this, -.2),
-            new Wait(this, 300),
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
             new SpinIntake(this),
             new Wait(this, 3500),
             
@@ -75,29 +76,30 @@ public class AutoRedFar extends Auto {
             
             // Move to second line
             new CloseStopper(this),
-            new Move(this, 1280, -300, 90),
+            new Move(this, 1200, -300, 90),
             
             // Intake artifacts
             new SpinIntake(this),
             new SpinPusher(this), 
-            new Move(this, 1250, -1100, 90),
-            new Wait(this, 500),
+            new Move(this, 1190, -1100, 90),
+            new Wait(this, 750),
             new StopPusher(this),
+            new StopIntake(this),
             
             // Get ready for launching
             new OpenStopper(this),
             new SpinLauncherFast(this),
             
             // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+22), // same as first shooting position
+            new Move(this, 180, 0, -90+18), // same as first shooting position
             
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
             new Wait(this, 500),
-            new SpinIntake(this, -.2),
-            new Wait(this, 300),
+            new SpinIntake(this, -.3),
+            new Wait(this, 200),
             new SpinIntake(this),
             
             new Wait(this, 3500),

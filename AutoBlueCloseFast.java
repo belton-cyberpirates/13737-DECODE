@@ -17,78 +17,48 @@ public class AutoBlueCloseFast extends Auto {
             // ======================= AUTO START ======================= //
 
             // Get to firing position
-            new CloseStopper(this),
+            new OpenStopper(this),
             new SpinLauncher(this),
             new Move(this, -450, -1120, -135),
             
-            // Wait for launcher to get up to speed
-            new Wait(this, 500),
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            
-            // Engage pusher
-            new SpinPusher(this),
-            
             // Launch!
-            new OpenStopper(this),
-            new Wait(this, 500),
-            new CloseStopper(this),
-            new Wait(this, 500),
             new WaitForLauncher(this),
             new Wait(this, 500),
-            
-            // Engage third artifact
+            new SpinPusher(this),
+            new Wait(this, 500),
+            new SpinIntake(this, -.3),
+            new Wait(this, 300),
             new SpinIntake(this),
-            new Move(this, -475, -1095, -135),
-            new StopIntake(this),
             
-            // Launch the rest!
-            new OpenStopper(this),
-            new Wait(this, 2500),
-            new CloseStopper(this),
-            new Wait(this, 750),
+            new Wait(this, 3000),
             
             // Collect second batch
+            new CloseStopper(this),
             new SpinIntake(this),
             new Move(this, -650, -650, -90),
             new Move(this, -650, -100, -90),
             new Wait(this, 1000),
             new StopIntake(this),
+            new StopPusher(this),
             
             // Get to firing position (x2)
-            new CloseStopper(this),
+            new OpenStopper(this),
             new SpinLauncher(this),
             new Move(this, -475, -1120, -135),
             
-            // Wait for launcher to get up to speed (x2)
-            new Wait(this, 500),
+            // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
-            
-            // Engage pusher (x2)
             new SpinPusher(this),
-            
-            // Launch! (x2)
-            new OpenStopper(this),
             new Wait(this, 500),
-            new CloseStopper(this),
-            new Wait(this, 500),
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            
-            // Engage third artifact (x2)
+            new SpinIntake(this, -.3),
+            new Wait(this, 300),
             new SpinIntake(this),
-            new Move(this, -475, -1095, -135),
-            new StopIntake(this),
             
-            // Launch the rest! (x2)
-            new OpenStopper(this),
-            new Wait(this, 2500),
-            new CloseStopper(this),
-            new Wait(this, 750),
+            new Wait(this, 3000),
             
             // Evacuate launch zone
-            //new Move(this, -650, -300, -90),
+            new Move(this, -650, -300, -90),
             
             // ======================== AUTO END ======================== //
         };
