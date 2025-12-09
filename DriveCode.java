@@ -21,7 +21,6 @@ public class DriveCode extends LinearOpMode {
     Launcher launcher;
 
     // Other Hardware Objects
-    Servo stopper;
     Servo light;
     
     // Vars
@@ -34,7 +33,6 @@ public class DriveCode extends LinearOpMode {
         intake = new Intake(this);
         launcher = new Launcher(this);
         
-        stopper = hardwareMap.get(Servo.class, BotConfig.STOPPER_NAME);
         light = hardwareMap.get(Servo.class, BotConfig.LIGHT_NAME);
 
         // Wait for the start button to be pressed
