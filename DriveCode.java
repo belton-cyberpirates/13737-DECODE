@@ -126,7 +126,6 @@ public class DriveCode extends LinearOpMode {
             telemetry.addData("Heading", driveMotors.odometry.getHeading(AngleUnit.DEGREES));
 
             // Turning values
-            telemetry.addData("joystickAngle", joystickAngle);
             telemetry.addData("turnPower", turnPower);
 
             telemetry.addData("thingy", ( rotatedY + rotatedX + ( turnPower )) * maxSpeed);
