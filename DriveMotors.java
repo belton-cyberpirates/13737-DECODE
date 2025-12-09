@@ -179,9 +179,22 @@ public class DriveMotors {
         double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, delta);
 
         double backLeftPower   = (-forward - strafe + anglePower);
-        double frontLeftPower  = (-forward + strafe + anglePower);
+        double frontLeftPower  = ( forward - strafe + anglePower);
         double frontRightPower = ( forward + strafe + anglePower);
-        double backRightPower  = ( forward - strafe + anglePower);
+        double backRightPower  = (-forward + strafe + anglePower);
+    }
+
+
+    public void DriveAndAim(double forward, double strafe, double targetX, double targetY) {
+        double xPos = odometry.getPosX(DistanceUnit.MM);
+        double yPos = odometry.getPosY(DistanceUnit.MM);
+
+        double deltaX = xPos - targetX;
+        double deltaY = yPos - targetY;
+
+        double targetAngle = Math.atan2(deltaY, deltaX);
+
+        DriveAndAim(forward, strafe, targetAngle)
     }
 
 
