@@ -129,7 +129,7 @@ public class DriveMotors {
          */
         //odo.recalibrateIMU();
         this.odometry.resetPosAndIMU();
-        this.odometry.setPosition( new Pose2D(DistanceUnit.MM, 0, 0, AngleUnit.DEGREES, -45) );
+        this.odometry.setPosition( new Pose2D(DistanceUnit.MM, 0, 0, AngleUnit.DEGREES, 0) );
     }
 
 
@@ -239,18 +239,20 @@ public class DriveMotors {
         frontRight.setPower(frontRightPower);
         backRight.setPower(backRightPower);
         
-        auto.telemetry.addData("drivemotors heading", heading);
+        // Telemetry
+        auto.telemetry.addData("X pos", this.odometry.getPosX(DistanceUnit.MM));
+        auto.telemetry.addData("Y pos", this.odometry.getPosY(DistanceUnit.MM));
+        auto.telemetry.addData("drivemotors heading", this.heading);
         
         auto.telemetry.addData("drivemotors xError", xError);
         auto.telemetry.addData("drivemotors yError", yError);
         auto.telemetry.addData("drivemotors angleError", targetHeading - heading);
         
-        auto.telemetry.addData("drivemotors forwardPower", forwardPower);
-        auto.telemetry.addData("drivemotors horizontalPower", horizontalPower);
-        auto.telemetry.addData("drivemotors anglePower", anglePower);
+        // auto.telemetry.addData("drivemotors forwardPower", forwardPower);
+        // auto.telemetry.addData("drivemotors horizontalPower", horizontalPower);
+        // auto.telemetry.addData("drivemotors anglePower", anglePower);
         
-        auto.telemetry.addData("device status", odometry.getDeviceStatus());
-        
+        // auto.telemetry.addData("device status", odometry.getDeviceStatus());
     }
 
 

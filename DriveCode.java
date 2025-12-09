@@ -119,10 +119,6 @@ public class DriveCode extends LinearOpMode {
             
             // Telemetry
             // Odometry values
-            telemetry.addData("X pos", driveMotors.odometry.getPosX(DistanceUnit.MM));
-            telemetry.addData("Y pos", driveMotors.odometry.getPosY(DistanceUnit.MM));
-
-            telemetry.addData("Heading", driveMotors.odometry.getHeading(AngleUnit.DEGREES));
             
             telemetry.addData("X encoder", driveMotors.odometry.getEncoderX());
             telemetry.addData("Y encoder", driveMotors.odometry.getEncoderY());

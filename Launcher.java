@@ -36,14 +36,17 @@ public class Launcher {
         
         double launcherVelocity = launcher.getVelocity();
 
-        launcher.setPower( launcherPIDFController.PIDFControl(
-            this.launcherTargetVelocity,
-            launcherVelocity,
-            deltaTime
-        ));
+        launcher.setPower(
+            launcherPIDFController.PIDFControl(
+                this.launcherTargetVelocity,
+                launcherVelocity,
+                deltaTime
+            )
+        );
         
         deltaTimer.reset();
         
+        // Telemetry
         auto.telemetry.addData("Launcher Velocity", getVelocity());
         auto.telemetry.addData("Launcher Target Velocity", launcherTargetVelocity);
         auto.telemetry.addData("Launcher Power", launcherPIDFController.lastOutput);
