@@ -11,32 +11,37 @@ import org.firstinspires.ftc.teamcode.Auto;
 @Autonomous(name = "Red Close Fast"/*, preselectTeleOp="Your Drive Code Here"*/, group="red")
 //@Disabled
 public class AutoRedCloseFast extends Auto {
+    
+    Action[] launchSequence = {
+        // Get ready for launching
+        new OpenStopper(this),
+        new SpinLauncher(this),
+    
+        // Move to shooting position
+            new Move(this, -450, 1000, -50),
+        
+        // Launch!
+        new WaitForLauncher(this),
+        new Wait(this, 500),
+        new SpinPusher(this),
+        new Wait(this, 1000),
+        new SpinIntake(this),
+        new SpinPusher(this, 2),
+        
+        new Wait(this, 1500),
+
+        // Reset
+        new StopLauncher(this),
+        new StopIntake(this),
+        new StopPusher(this)
+    };
+        
 
     public Action[] getActions() {
         Action[] actions = {
             // ======================= AUTO START ======================= //
-            // Get ready for launching
-            new OpenStopper(this),
-            new SpinLauncher(this),
-            
-            // Move to shooting position
-            new Move(this, -450, 1120, -50),
-            
             // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
-            new SpinIntake(this),
-            
-            new Wait(this, 3000),
-            
-            // Reset
-            new StopLauncher(this),
-            new StopIntake(this),
-            new StopPusher(this),
+            new ActionSequence(this, launchSequence),
             
             // Move to first line
             new CloseStopper(this),
@@ -50,27 +55,7 @@ public class AutoRedCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Get ready for launching
-            new OpenStopper(this),
-            new SpinLauncher(this),
-            
-            // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, -450, 1120, -50), // same as first shooting position
-            
-            // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
-            new SpinIntake(this),
-            new Wait(this, 3500),
-            
-            // Reset
-            new StopLauncher(this),
-            new StopIntake(this),
-            new StopPusher(this),
+            new ActionSequence(this, launchSequence),
             
             // Move to second line
             new CloseStopper(this),
@@ -84,23 +69,9 @@ public class AutoRedCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Get ready for launching
-            new OpenStopper(this),
-            new SpinLauncher(this),
+            new Move(this, -1375, 200, 90),
             
-            // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, -450, 1120, -50), // same as first shooting position
-            
-            // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
-            new SpinIntake(this),
-            
-            new Wait(this, 3500),
+            new ActionSequence(this, launchSequence),
             
             // End sequence
             

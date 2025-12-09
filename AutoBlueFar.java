@@ -14,7 +14,7 @@ public class AutoBlueFar extends Auto {
 
     public Action[] getActions() {
         
-        Action[] farBlueLaunchSequence = {
+        Action[] launchSequence = {
             // Get ready for launching
             new OpenStopper(this),
             new SpinLauncherFast(this),
@@ -26,13 +26,12 @@ public class AutoBlueFar extends Auto {
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.2),
-            new Wait(this, 250),
+            new Wait(this, 1000),
             new SpinIntake(this),
+            new SpinPusher(this, 2),
             
-            new Wait(this, 3000),
-
+            new Wait(this, 2000),
+            
             // Reset
             new StopLauncher(this),
             new StopIntake(this),
@@ -43,7 +42,7 @@ public class AutoBlueFar extends Auto {
             // ======================= AUTO START ======================= //
             
             // Launch!
-            new ActionSequence(this, farBlueLaunchSequence),
+            new ActionSequence(this, launchSequence),
             
             // Move to first line
             new Move(this, 680, 300, -90),
@@ -57,7 +56,7 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            new ActionSequence(this, farBlueLaunchSequence),
+            new ActionSequence(this, launchSequence),
 
             // If we have more time 
 
@@ -73,7 +72,7 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            new ActionSequence(this, farBlueLaunchSequence),
+            new ActionSequence(this, launchSequence),
 
             // I don't think we have any chance of shooting these artifacts, if we even have time to grab them
             
