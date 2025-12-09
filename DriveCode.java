@@ -27,7 +27,6 @@ public class DriveCode extends LinearOpMode {
     // Vars
     double headingOffset = 0;
     boolean stopperPos = false;
-    boolean prevRightTrigger = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
