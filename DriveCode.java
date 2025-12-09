@@ -48,11 +48,9 @@ public class DriveCode extends LinearOpMode {
                 headingOffset = driveMotors.heading;
             }
             
-
             // Process classes
             driveMotors.process();
             launcher.process();
-
             
             // P1 variables
             double leftStickXGP1 = gamepad1.left_stick_x;
@@ -62,9 +60,6 @@ public class DriveCode extends LinearOpMode {
 
             // Get the speed the bot would go with the joystick pushed all the way
             double maxSpeed = calcMaxSpeed(gamepad1.right_trigger - gamepad1.left_trigger, BotConfig.BASE_SPEED, BotConfig.MAX_BOOST);
-            
-            double joystickLength = Math.sqrt( Math.pow(gamepad1.right_stick_y, 2) + Math.pow(gamepad1.right_stick_x, 2) );
-            double joystickAngle = -Math.atan2(gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI/2;
             
             double turnPower = -gamepad1.right_stick_x;
 
