@@ -15,15 +15,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 @TeleOp(name="Field Centric (main)", group="DriveCodes")
 public class DriveCode extends LinearOpMode {
     
-    // Drive constants
-
+    // Hardware Helper Classes
     DriveMotors driveMotors;
     Intake intake;
     Launcher launcher;
 
+    // Other Hardware Objects
     Servo stopper;
     Servo light;
     
+    // Vars
     double headingOffset = 0;
     boolean stopperPos = false;
     boolean prevRightTrigger = false;
@@ -36,8 +37,7 @@ public class DriveCode extends LinearOpMode {
         launcher = new Launcher(this);
         
         stopper = hardwareMap.get(Servo.class, BotConfig.STOPPER_NAME);
-        
-        light = hardwareMap.get(Servo.class, "light");
+        light = hardwareMap.get(Servo.class, BotConfig.LIGHT_NAME);
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -58,7 +58,7 @@ public class DriveCode extends LinearOpMode {
             double rightStickXGP1 = gamepad1.right_stick_x;
             double rightStickYGP1 = gamepad1.right_stick_y;
 
-            // Get the speed the bot would go with the joystick pushed all the way
+            // Get the speed the bot should go with the joystick pushed all the way
             double maxSpeed = calcMaxSpeed(gamepad1.right_trigger - gamepad1.left_trigger, BotConfig.BASE_SPEED, BotConfig.MAX_BOOST);
             
             double turnPower = -gamepad1.right_stick_x;
@@ -100,13 +100,13 @@ public class DriveCode extends LinearOpMode {
             
             // Flywheel
             if (rightStickYGP2 > .5) {
-                launcher.SetVelocity(0);
+                launcher.SetVelocity(BotConfig.LAUNCHER_DROP_VELOCITY);
             } 
             else if (rightStickYGP2 < -.5) {
-                launcher.SetVelocity(1500);
+                launcher.SetVelocity(BotConfig.LAUNCHER_VELOCITY);
             }
             else {
-                launcher.SetVelocity(1000);
+                launcher.SetVelocity(BotConfig.LAUNCHER_PASSIVE_VELOCITY);
             }
             
             // Light
@@ -121,15 +121,12 @@ public class DriveCode extends LinearOpMode {
             // Odometry values
             telemetry.addData("X pos", driveMotors.odometry.getPosX(DistanceUnit.MM));
             telemetry.addData("Y pos", driveMotors.odometry.getPosY(DistanceUnit.MM));
+
+            telemetry.addData("Heading", driveMotors.odometry.getHeading(AngleUnit.DEGREES));
+            
             telemetry.addData("X encoder", driveMotors.odometry.getEncoderX());
             telemetry.addData("Y encoder", driveMotors.odometry.getEncoderY());
-            telemetry.addData("Heading", driveMotors.odometry.getHeading(AngleUnit.DEGREES));
 
-            // Turning values
-            telemetry.addData("turnPower", turnPower);
-
-            telemetry.addData("thingy", ( rotatedY + rotatedX + ( turnPower )) * maxSpeed);
-            
             telemetry.update();
         }
     }
@@ -139,9 +136,10 @@ public class DriveCode extends LinearOpMode {
      * if boost trigger unpressed, return base_speed,
      * else return base_speed + boost amount
      */
-    double calcMaxSpeed(double triggerVal, double BASE_SPEED, double MAX_BOOST) {
-        double boostRatio = triggerVal * MAX_BOOST;
-        double boostSpeed = boostRatio * BASE_SPEED;
-        return BASE_SPEED + boostSpeed;
+    double calcMaxSpeed(double triggerVal, double baseSpeed, double boostMult) {
+        double boostRatio = triggerVal * boostMult;
+        double boostSpeed = boostRatio * baseSpeed;
+
+        return baseSpeed + boostSpeed;
     }
 }

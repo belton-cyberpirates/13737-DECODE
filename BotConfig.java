@@ -15,6 +15,8 @@ public class BotConfig {
   public static final String STOPPER_NAME = "stopper";
 
   public static final String LAUNCHER_NAME = "flywheel";
+
+  public static final String LIGHT_NAME = "light";
   // ---------------------------------------------------------------------------
 
 
@@ -34,6 +36,7 @@ public class BotConfig {
   public static final double STRAFE_MULT = 1.41;
 
   public static final int LAUNCHER_DROP_VELOCITY = 300;
+  public static final int LAUNCHER_PASSIVE_VELOCITY = 1000;
   public static final int LAUNCHER_VELOCITY = 1500;
   public static final int LAUNCHER_FAR_VELOCITY = 1790;
   
