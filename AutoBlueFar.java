@@ -14,13 +14,13 @@ public class AutoBlueFar extends Auto {
 
     public Action[] getActions() {
         
-        Action[] launchSequence = {
+        Action[] farBlueLaunchSequence = {
             // Get ready for launching
             new OpenStopper(this),
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 0, -90-24),
+            new Move(this, 180, 0, -90-24.5),
             
             // Launch!
             new WaitForLauncher(this),
@@ -43,7 +43,7 @@ public class AutoBlueFar extends Auto {
             // ======================= AUTO START ======================= //
             
             // Launch!
-            new ActionSequence(this, launchSequence),
+            new ActionSequence(this, farBlueLaunchSequence),
             
             // Move to first line
             new Move(this, 680, 300, -90),
@@ -53,27 +53,27 @@ public class AutoBlueFar extends Auto {
             new SpinIntake(this),
             new SpinPusher(this), 
             new Move(this, 680, 1100, -90),
-            new Wait(this, 500),
+            new Wait(this, 750),
             new StopPusher(this),
             new StopIntake(this),
             
-            new ActionSequence(this, launchSequence),
+            new ActionSequence(this, farBlueLaunchSequence),
 
             // If we have more time 
 
             // Move to second line
-            new Move(this, 1280, 300, -90),
+            new Move(this, 1200, 300, -90),
 
             // Intake artifacts
             new CloseStopper(this),
             new SpinIntake(this),
             new SpinPusher(this), 
-            new Move(this, 1250, 1100, -90),
-            new Wait(this, 500),
+            new Move(this, 1190, 1100, -90),
+            new Wait(this, 750),
             new StopPusher(this),
             new StopIntake(this),
             
-            new ActionSequence(this, launchSequence),
+            new ActionSequence(this, farBlueLaunchSequence),
 
             // I don't think we have any chance of shooting these artifacts, if we even have time to grab them
             
