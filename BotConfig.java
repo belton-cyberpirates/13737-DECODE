@@ -30,11 +30,12 @@ public class BotConfig {
   *****************************************************************************/
   public static final double BASE_SPEED = .6;
   
-  public static final double MAX_BOOST = 0.66; // boost maxes out at an additional 60% of the base speed
+  public static final double MAX_BOOST = 0.66; // boost maxes out at an additional 66% of the base speed
   public static final double STRAFE_MULT = 1.41;
 
+  public static final int LAUNCHER_DROP_VELOCITY = 300;
   public static final int LAUNCHER_VELOCITY = 1500;
-  public static final int LAUNCHER_FAR_VELOCITY = 1800;
+  public static final int LAUNCHER_FAR_VELOCITY = 1790;
   
   public static final double LIGHT_GREEN = 0.472;
   public static final double LIGHT_RED = 0.277;
@@ -70,7 +71,7 @@ public class BotConfig {
   /*****************************************************************************
   ** LAUNCHER CONSTANTS
   *****************************************************************************/
-  public static final int LAUNCHER_VELOCITY_MARGIN = 15;
+  public static final int LAUNCHER_VELOCITY_MARGIN = 40;
   // ---------------------------------------------------------------------------
 
 
