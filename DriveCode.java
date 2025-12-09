@@ -26,7 +26,6 @@ public class DriveCode extends LinearOpMode {
     
     // Vars
     double headingOffset = 0;
-    boolean stopperPos = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -117,10 +116,7 @@ public class DriveCode extends LinearOpMode {
             );
             
             // Telemetry
-            // Odometry values
-            
-            telemetry.addData("X encoder", driveMotors.odometry.getEncoderX());
-            telemetry.addData("Y encoder", driveMotors.odometry.getEncoderY());
+            telemetry.addData("headingOffset", headingOffset);
 
             telemetry.update();
         }
