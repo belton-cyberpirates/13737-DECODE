@@ -26,7 +26,9 @@ public class AutoRedFar extends Auto {
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
-            new Wait(this, 1000),
+            new Wait(this, 500),
+            new SpinIntake(this, -.3),
+            new Wait(this, 250),
             new SpinIntake(this),
             new SpinPusher(this, 3),
             

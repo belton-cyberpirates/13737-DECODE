@@ -21,12 +21,14 @@ public class AutoRedCloseFast extends Auto {
         new Move(this, -450, 1000, -50),
         
         // Launch!
-        new WaitForLauncher(this),
-        new Wait(this, 500),
-        new SpinPusher(this),
-        new Wait(this, 1000),
-        new SpinIntake(this),
-        new SpinPusher(this, 3),
+            new WaitForLauncher(this),
+            new Wait(this, 500),
+            new SpinPusher(this),
+            new Wait(this, 500),
+            new SpinIntake(this, -.3),
+            new Wait(this, 250),
+            new SpinIntake(this),
+            new SpinPusher(this, 3),
         
         new Wait(this, 2000),
 
