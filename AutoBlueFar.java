@@ -80,10 +80,6 @@ public class AutoBlueFar extends Auto {
 
             // Move out of triangle
             new Move(this, 50, 500, -90),
-
-
-
-            
             
             // ======================== AUTO END ======================== //
         };
