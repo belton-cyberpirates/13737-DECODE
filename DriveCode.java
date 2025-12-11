@@ -115,6 +115,7 @@ public class DriveCode extends LinearOpMode {
             
             // Telemetry
             telemetry.addData("headingOffset", headingOffset);
+            telemetry.addData("teleop heading", heading);
 
             telemetry.update();
         }
