@@ -56,9 +56,8 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
+            // Launch!
             new ActionSequence(this, launchSequence),
-
-            // If we have more time 
 
             // Move to second line
             new Move(this, 1200, 300, -90),
@@ -72,9 +71,8 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
+            // Launch!
             new ActionSequence(this, launchSequence),
-
-            // I don't think we have any chance of shooting these artifacts, if we even have time to grab them
             
             // End sequence
 

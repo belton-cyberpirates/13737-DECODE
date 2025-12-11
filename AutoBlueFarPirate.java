@@ -59,7 +59,7 @@ public class AutoBlueFarPirate extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch
+            // Launch!
             new Move(this, 1210, 0, 90),
             new ActionSequence(this, launchSequence),
             
@@ -75,6 +75,7 @@ public class AutoBlueFarPirate extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
+            // Launch!
             new ActionSequence(this, launchSequence),
 
             // End sequence

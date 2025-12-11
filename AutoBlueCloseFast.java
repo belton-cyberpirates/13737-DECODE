@@ -55,6 +55,7 @@ public class AutoBlueCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
+            // Launch!
             new ActionSequence(this, launchSequence),
             
             // Move to second line
@@ -69,9 +70,8 @@ public class AutoBlueCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
+            // Launch!
             new ActionSequence(this, launchSequence),
-            
-            // End sequence
             
             // Move out of triangle
             new CloseStopper(this),
