@@ -230,7 +230,7 @@ public class DriveMotors {
 
         // Find highest motor power value
         double highestPower = Collections.max(Arrays.asList( Math.abs(backLeftPower), Math.abs(frontLeftPower), Math.abs(frontRightPower), Math.abs(backRightPower) ));
-        auto.telemetry.addData("", highestPower);
+        // auto.telemetry.addData("", highestPower);
         // Scale power values if trying to run motors faster than possible
         // if (highestPower > 1) {
         //     backLeftPower /= highestPower;
