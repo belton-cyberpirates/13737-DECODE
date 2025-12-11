@@ -18,7 +18,7 @@ public class AutoBlueCloseFast extends Auto {
         new SpinLauncher(this),
         
         // Move to shooting position
-        new Move(this, -450, 1120, -50),
+        new Move(this, -700, -950, -135),
         
         // Launch!
         new WaitForLauncher(this),

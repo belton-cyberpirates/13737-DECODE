@@ -18,7 +18,7 @@ public class AutoRedCloseFast extends Auto {
         new SpinLauncher(this),
     
         // Move to shooting position
-            new Move(this, -450, 1000, -50),
+        new Move(this, -450, 1000, -50),
         
         // Launch!
         new WaitForLauncher(this),
@@ -26,12 +26,11 @@ public class AutoRedCloseFast extends Auto {
         new SpinPusher(this),
         new Wait(this, 1000),
         new SpinIntake(this),
-        new SpinPusher(this, 2),
+        new SpinPusher(this, 3),
         
-        new Wait(this, 1500),
+        new Wait(this, 2000),
 
         // Reset
-        new StopLauncher(this),
         new StopIntake(this),
         new StopPusher(this)
     };

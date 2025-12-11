@@ -14,31 +14,35 @@ public class AutoRedFar extends Auto {
 
     public Action[] getActions() {
         
-        Action[] actions = {
-            // ======================= AUTO START ======================= //
-            
+        Action[] launchSequence = {
             // Get ready for launching
             new OpenStopper(this),
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 0, -90+18),
+            new Move(this, 180, 80, -90+20),
             
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
             new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
+            new Wait(this, 1000),
             new SpinIntake(this),
+            new SpinPusher(this, 3),
             
-            new Wait(this, 3000),
+            new Wait(this, 2000),
             
             // Reset
             new StopLauncher(this),
             new StopIntake(this),
-            new StopPusher(this),
+            new StopPusher(this)
+        };
+        
+        Action[] actions = {
+            // ======================= AUTO START ======================= //
+            
+            // Launch!
+            new ActionSequence(this, launchSequence),
             
             // Move to first line
             new CloseStopper(this),
@@ -52,27 +56,8 @@ public class AutoRedFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Get ready for launching
-            new OpenStopper(this),
-            new SpinLauncherFast(this),
-            
-            // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+18), // same as first shooting position
-            
             // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
-            new SpinIntake(this),
-            new Wait(this, 3500),
-            
-            // Reset
-            new StopLauncher(this),
-            new StopIntake(this),
-            new StopPusher(this),
+            new ActionSequence(this, launchSequence),
             
             // Move to second line
             new CloseStopper(this),
@@ -86,29 +71,12 @@ public class AutoRedFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Get ready for launching
-            new OpenStopper(this),
-            new SpinLauncherFast(this),
-            
-            // Move back to shooting position, while intaking to not lose artifacts
-            new Move(this, 180, 0, -90+18), // same as first shooting position
-            
             // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 200),
-            new SpinIntake(this),
-            
-            new Wait(this, 3500),
-            
-            // End sequence
+            new ActionSequence(this, launchSequence),
             
             // Move out of triangle
             new CloseStopper(this),
-            new Move(this, 50, -500, 0),
+            new Move(this, 50, -500, 90),
             
             // ======================== AUTO END ======================== //
         };

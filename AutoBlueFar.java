@@ -28,7 +28,7 @@ public class AutoBlueFar extends Auto {
             new SpinPusher(this),
             new Wait(this, 1000),
             new SpinIntake(this),
-            new SpinPusher(this, 2),
+            new SpinPusher(this, 3),
             
             new Wait(this, 2000),
             
@@ -80,7 +80,7 @@ public class AutoBlueFar extends Auto {
 
             // Move out of triangle
             new Move(this, 50, 500, -90),
-            
+
             // ======================== AUTO END ======================== //
         };
         
