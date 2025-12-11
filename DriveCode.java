@@ -39,7 +39,7 @@ public class DriveCode extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Reset yaw when y button pressed so restarting is not needed if it needs a reset
+            // Reset yaw when y button pressed in case of misalignment
             if (gamepad1.y) {
                 headingOffset = driveMotors.heading;
             }
