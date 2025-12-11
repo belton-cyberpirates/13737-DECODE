@@ -89,13 +89,13 @@ public class DriveCode extends LinearOpMode {
             intake.SetPower(leftStickYGP2 < 0 ? -leftStickYGP2 : -leftStickYGP2 / 3);
             
             // Pusher
-            intake.SetPusherPower(-leftStickYGP2 / 1.5);
+            intake.SetPusherPower(gamepad2.dpad_down ? .4 : -leftStickYGP2 / 1.5);
             
             // Stopper
-            intake.SetStopper(gamepad2.right_trigger > 0.5);
+            intake.SetStopper(gamepad2.dpad_down || gamepad2.right_trigger > 0.5);
             
             // Flywheel
-            if (rightStickYGP2 > .5) {
+            if (gamepad2.dpad_down) {
                 launcher.SetVelocity(BotConfig.LAUNCHER_DROP_VELOCITY);
             } 
             else if (rightStickYGP2 < -.5) {
