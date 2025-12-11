@@ -66,6 +66,7 @@ public class DriveMotors {
     ElapsedTime odometryTimer = new ElapsedTime();
     
     public double heading = 0;
+    double deltaTime = 0;
 
 
     public DriveMotors(LinearOpMode auto) {
@@ -134,7 +135,7 @@ public class DriveMotors {
 
 
     public double process() {
-        double deltaTime = deltaTimer.seconds();
+        deltaTime = deltaTimer.seconds();
         
         // Get the heading of the bot (the angle it is facing) in radians
         double newHeading = odometry.getHeading(AngleUnit.RADIANS);
@@ -158,6 +159,10 @@ public class DriveMotors {
                 break;
         }
         
+        auto.telemetry.addData("X pos", this.odometry.getPosX(DistanceUnit.MM));
+        auto.telemetry.addData("Y pos", this.odometry.getPosY(DistanceUnit.MM));
+        auto.telemetry.addData("drivemotors heading", this.heading);
+        
         this.odometry.update();
         deltaTimer.reset();
         
@@ -176,7 +181,7 @@ public class DriveMotors {
 
 
     public void DriveAndAim(double forward, double strafe, double targetAngle) {
-        double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, delta);
+        double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, deltaTime);
 
         double backLeftPower   = (-forward - strafe + anglePower);
         double frontLeftPower  = ( forward - strafe + anglePower);
@@ -194,7 +199,7 @@ public class DriveMotors {
 
         double targetAngle = Math.atan2(deltaY, deltaX);
 
-        DriveAndAim(forward, strafe, targetAngle)
+        DriveAndAim(forward, strafe, targetAngle);
     }
 
 
@@ -240,10 +245,6 @@ public class DriveMotors {
         backRight.setPower(backRightPower);
         
         // Telemetry
-        auto.telemetry.addData("X pos", this.odometry.getPosX(DistanceUnit.MM));
-        auto.telemetry.addData("Y pos", this.odometry.getPosY(DistanceUnit.MM));
-        auto.telemetry.addData("drivemotors heading", this.heading);
-        
         auto.telemetry.addData("drivemotors xError", xError);
         auto.telemetry.addData("drivemotors yError", yError);
         auto.telemetry.addData("drivemotors angleError", targetHeading - heading);
