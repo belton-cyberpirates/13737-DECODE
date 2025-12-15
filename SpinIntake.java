@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 public class SpinIntake extends Action {
     Auto auto;
-    double mult;
+    double mult = 1;
 
     public SpinIntake(Auto auto) {
         this.auto = auto;
