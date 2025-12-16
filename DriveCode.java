@@ -25,6 +25,10 @@ public class DriveCode extends LinearOpMode {
     
     // Vars
     double headingOffset = 0;
+    
+    double aPosX = 0;
+    double aPosY = 0;
+    double aPosHeading = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,7 +43,7 @@ public class DriveCode extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Reset yaw when y button pressed in case of misalignment
+            // Reset yaw when y button pressed so restarting is not needed if it needs a reset
             if (gamepad1.y) {
                 headingOffset = driveMotors.heading;
             }
@@ -74,12 +78,35 @@ public class DriveCode extends LinearOpMode {
             
             // Set the power of the wheels based off the new joystick coordinates
             // y+x+stick <- [-1,1]
-            driveMotors.DriveWithPower(
-                ( rotatedY + rotatedX + ( turnPower )) * maxSpeed, // Back left
-                ( rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front left
-                (-rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front right
-                (-rotatedY + rotatedX + ( turnPower )) * maxSpeed  // Back right
-            );
+            if (gamepad1.a) {
+                if (gamepad1.left_bumper) {
+                    aPosX = driveMotors.GetX();
+                    aPosY = driveMotors.GetY();
+                    aPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+                }
+                else {
+                    driveMotors.Move(
+                        aPosX,
+                        aPosY,
+                        aPosHeading
+                    );
+                }
+            }
+            else if (gamepad1.b) {
+                driveMotors.DriveAndAim(
+                    rotatedX,
+                    rotatedY,
+                    (headingOffset * 180 / Math.PI) -90+19
+                );
+            }
+            else {
+                driveMotors.DriveWithPower(
+                    ( rotatedY + rotatedX + ( turnPower )) * maxSpeed, // Back left
+                    ( rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front left
+                    (-rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front right
+                    (-rotatedY + rotatedX + ( turnPower )) * maxSpeed  // Back right
+                );
+            }
             
             // P2 variables
             double leftStickYGP2 = gamepad2.left_stick_y;
@@ -99,7 +126,7 @@ public class DriveCode extends LinearOpMode {
                 launcher.SetVelocity(BotConfig.LAUNCHER_DROP_VELOCITY);
             } 
             else if (rightStickYGP2 < -.5) {
-                launcher.SetVelocity(BotConfig.LAUNCHER_VELOCITY);
+                launcher.SetVelocity((gamepad2.left_trigger > 0) ? BotConfig.LAUNCHER_FAR_VELOCITY : BotConfig.LAUNCHER_VELOCITY);
             }
             else {
                 launcher.SetVelocity(BotConfig.LAUNCHER_PASSIVE_VELOCITY);
@@ -115,7 +142,10 @@ public class DriveCode extends LinearOpMode {
             
             // Telemetry
             telemetry.addData("headingOffset", headingOffset);
-            telemetry.addData("teleop heading", heading);
+                    
+            telemetry.addData("x", aPosX);
+            telemetry.addData("y", aPosY);
+            telemetry.addData("h", aPosHeading);
 
             telemetry.update();
         }
