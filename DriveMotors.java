@@ -181,12 +181,18 @@ public class DriveMotors {
 
 
     public void DriveAndAim(double forward, double strafe, double targetAngle) {
+        this.state = states.POWER;
         double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, deltaTime);
 
         double backLeftPower   = (-forward - strafe + anglePower);
         double frontLeftPower  = ( forward - strafe + anglePower);
         double frontRightPower = ( forward + strafe + anglePower);
         double backRightPower  = (-forward + strafe + anglePower);
+
+        backLeft.setPower(backLeftPower);
+        frontLeft.setPower(frontLeftPower);
+        frontRight.setPower(frontRightPower);
+        backRight.setPower(backRightPower);
     }
 
 
@@ -230,7 +236,7 @@ public class DriveMotors {
 
         // Find highest motor power value
         double highestPower = Collections.max(Arrays.asList( Math.abs(backLeftPower), Math.abs(frontLeftPower), Math.abs(frontRightPower), Math.abs(backRightPower) ));
-        // auto.telemetry.addData("", highestPower);
+        auto.telemetry.addData("", highestPower);
         // Scale power values if trying to run motors faster than possible
         // if (highestPower > 1) {
         //     backLeftPower /= highestPower;
@@ -342,5 +348,20 @@ public class DriveMotors {
         this.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+    
+    
+    public double GetX() {
+        return odometry.getPosX(DistanceUnit.MM);
+    }
+    
+    
+    public double GetY() {
+        return odometry.getPosY(DistanceUnit.MM);
+    }
+    
+    
+    public double GetHeading() {
+        return heading;
     }
 }
