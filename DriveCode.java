@@ -29,6 +29,14 @@ public class DriveCode extends LinearOpMode {
     double aPosX = 0;
     double aPosY = 0;
     double aPosHeading = 0;
+    
+    double xPosX = 0;
+    double xPosY = 0;
+    double xPosHeading = 0;
+    
+    double yPosX = 0;
+    double yPosY = 0;
+    double yPosHeading = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -43,8 +51,8 @@ public class DriveCode extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Reset yaw when y button pressed in case of misalignment
-            if (gamepad1.y) {
+            // Reset yaw when dpad up pressed in case of misalignment
+            if (gamepad1.dpad_up) {
                 headingOffset = driveMotors.heading;
             }
             
@@ -89,6 +97,34 @@ public class DriveCode extends LinearOpMode {
                         aPosX,
                         aPosY,
                         aPosHeading
+                    );
+                }
+            }
+            else if (gamepad1.x) {
+                if (gamepad1.left_bumper) {
+                    xPosX = driveMotors.GetX();
+                    xPosY = driveMotors.GetY();
+                    xPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+                }
+                else {
+                    driveMotors.Move(
+                        xPosX,
+                        xPosY,
+                        xPosHeading
+                    );
+                }
+            }
+            else if (gamepad1.y) {
+                if (gamepad1.left_bumper) {
+                    yPosX = driveMotors.GetX();
+                    yPosY = driveMotors.GetY();
+                    yPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+                }
+                else {
+                    driveMotors.Move(
+                        yPosX,
+                        yPosY,
+                        yPosHeading
                     );
                 }
             }
