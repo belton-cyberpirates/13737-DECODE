@@ -20,19 +20,21 @@ public class AutoRedFar extends Auto {
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 80, -90+20),
+            new Move(this, 180, 80, -90+19),
             
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
+            
             new SpinPusher(this),
-            new Wait(this, 500),
+            new SpinIntake(this),
+            new Wait(this, 750),
             new SpinIntake(this, -.3),
-            new Wait(this, 250),
+            new Wait(this, 350),
             new SpinIntake(this),
             new SpinPusher(this, 3),
             
-            new Wait(this, 2000),
+            new Wait(this, 1500),
             
             // Reset
             new StopLauncher(this),

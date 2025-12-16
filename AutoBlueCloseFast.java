@@ -23,14 +23,16 @@ public class AutoBlueCloseFast extends Auto {
         // Launch!
         new WaitForLauncher(this),
         new Wait(this, 500),
+            
         new SpinPusher(this),
-        new Wait(this, 500),
+        new SpinIntake(this),
+        new Wait(this, 750),
         new SpinIntake(this, -.3),
-        new Wait(this, 250),
+        new Wait(this, 350),
         new SpinIntake(this),
         new SpinPusher(this, 3),
         
-        new Wait(this, 2000),
+        new Wait(this, 1500),
 
         // Reset
         new StopLauncher(this),
@@ -47,17 +49,16 @@ public class AutoBlueCloseFast extends Auto {
             
             // Move to first line
             new CloseStopper(this),
-            new Move(this, -700, -650, -90),
+            new Move(this, -720, -650, -90),
             
             // Intake artifacts
             new SpinIntake(this),
             new SpinPusher(this), 
-            new Move(this, -700, -100, -90),
+            new Move(this, -720, -100, -90),
             new Wait(this, 750),
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch!
             new ActionSequence(this, launchSequence),
             
             // Move to second line
@@ -72,12 +73,14 @@ public class AutoBlueCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch!
             new ActionSequence(this, launchSequence),
+            
+            // End sequence
             
             // Move out of triangle
             new CloseStopper(this),
-            new Move(this, -650, -300, -90),
+            new Move(this, -1300, -1050, -90),
+            new Wait(this, 1000)
             
             // ======================== AUTO END ======================== //
         };

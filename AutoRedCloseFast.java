@@ -18,19 +18,21 @@ public class AutoRedCloseFast extends Auto {
         new SpinLauncher(this),
     
         // Move to shooting position
-        new Move(this, -450, 1000, -50),
+        new Move(this, -510, 1050, -50),
         
         // Launch!
-            new WaitForLauncher(this),
-            new Wait(this, 500),
-            new SpinPusher(this),
-            new Wait(this, 500),
-            new SpinIntake(this, -.3),
-            new Wait(this, 250),
-            new SpinIntake(this),
-            new SpinPusher(this, 3),
+        new WaitForLauncher(this),
+        new Wait(this, 500),
+            
+        new SpinPusher(this),
+        new SpinIntake(this),
+        new Wait(this, 750),
+        new SpinIntake(this, -.3),
+        new Wait(this, 350),
+        new SpinIntake(this),
+        new SpinPusher(this, 3),
         
-        new Wait(this, 2000),
+        new Wait(this, 1500),
 
         // Reset
         new StopIntake(this),
@@ -56,29 +58,30 @@ public class AutoRedCloseFast extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch!
             new ActionSequence(this, launchSequence),
             
             // Move to second line
             new CloseStopper(this),
-            new Move(this, -1350, 800, 90),
+            new Move(this, -1370, 800, 90),
             
             // Intake artifacts
             new SpinIntake(this),
             new SpinPusher(this), 
-            new Move(this, -1375, -100, 90),
+            new Move(this, -1375, -50, 90),
             new Wait(this, 750),
             new StopPusher(this),
             new StopIntake(this),
             
-            
-            // Launch!
             new Move(this, -1375, 200, 90),
+            
             new ActionSequence(this, launchSequence),
+            
+            // End sequence
             
             // Move out of triangle
             new CloseStopper(this),
-            new Move(this, -650, 300, 90),
+            new Move(this, -1175, 1190, 90),
+            new Wait(this, 1000)
             
             // ======================== AUTO END ======================== //
         };

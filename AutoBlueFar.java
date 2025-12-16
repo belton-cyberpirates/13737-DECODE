@@ -25,14 +25,16 @@ public class AutoBlueFar extends Auto {
             // Launch!
             new WaitForLauncher(this),
             new Wait(this, 500),
+            
             new SpinPusher(this),
-            new Wait(this, 500),
+            new SpinIntake(this),
+            new Wait(this, 750),
             new SpinIntake(this, -.3),
-            new Wait(this, 250),
+            new Wait(this, 350),
             new SpinIntake(this),
             new SpinPusher(this, 3),
             
-            new Wait(this, 2000),
+            new Wait(this, 1500),
             
             // Reset
             new StopLauncher(this),
@@ -58,11 +60,12 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch!
             new ActionSequence(this, launchSequence),
 
+            // If we have more time 
+
             // Move to second line
-            new Move(this, 1200, 300, -90),
+            new Move(this, 1220, 300, -90),
 
             // Intake artifacts
             new CloseStopper(this),
@@ -73,14 +76,19 @@ public class AutoBlueFar extends Auto {
             new StopPusher(this),
             new StopIntake(this),
             
-            // Launch!
             new ActionSequence(this, launchSequence),
+
+            // I don't think we have any chance of shooting these artifacts, if we even have time to grab them
             
             // End sequence
 
             // Move out of triangle
             new Move(this, 50, 500, -90),
 
+
+
+            
+            
             // ======================== AUTO END ======================== //
         };
         
