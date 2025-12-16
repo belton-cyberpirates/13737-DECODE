@@ -51,8 +51,8 @@ public class DriveCode extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Reset yaw when dpad up pressed in case of misalignment
-            if (gamepad1.dpad_up) {
+            // Allow resetting yaw in case of misalignment
+            if (gamepad1.dpad_right) {
                 headingOffset = driveMotors.heading;
             }
             
@@ -84,58 +84,59 @@ public class DriveCode extends LinearOpMode {
             // strafing is slower than rolling, bump horizontal speed
             rotatedX *= BotConfig.STRAFE_MULT;
             
-            // Set the power of the wheels based off the new joystick coordinates
-            // y+x+stick <- [-1,1]
+            // set pin locations when corrosponding dpad buttons are pressed
+            if (gamepad1.dpad_down) {
+                aPosX = driveMotors.GetX();
+                aPosY = driveMotors.GetY();
+                aPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+            }
+            else if (gamepad1.dpad_left) {
+                xPosX = driveMotors.GetX();
+                xPosY = driveMotors.GetY();
+                xPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+            }
+            else if (gamepad1.dpad_up) {
+                yPosX = driveMotors.GetX();
+                yPosY = driveMotors.GetY();
+                yPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+            }
+
+            // track pin locations when respective buttons are being pressed
             if (gamepad1.a) {
-                if (gamepad1.left_bumper) {
-                    aPosX = driveMotors.GetX();
-                    aPosY = driveMotors.GetY();
-                    aPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
-                }
-                else {
-                    driveMotors.Move(
-                        aPosX,
-                        aPosY,
-                        aPosHeading
-                    );
-                }
+                driveMotors.Move(
+                    aPosX,
+                    aPosY,
+                    aPosHeading
+                );
             }
             else if (gamepad1.x) {
-                if (gamepad1.left_bumper) {
-                    xPosX = driveMotors.GetX();
-                    xPosY = driveMotors.GetY();
-                    xPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
-                }
-                else {
-                    driveMotors.Move(
-                        xPosX,
-                        xPosY,
-                        xPosHeading
-                    );
-                }
+                driveMotors.Move(
+                    xPosX,
+                    xPosY,
+                    xPosHeading
+                );
             }
             else if (gamepad1.y) {
-                if (gamepad1.left_bumper) {
-                    yPosX = driveMotors.GetX();
-                    yPosY = driveMotors.GetY();
-                    yPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
-                }
-                else {
-                    driveMotors.Move(
-                        yPosX,
-                        yPosY,
-                        yPosHeading
-                    );
-                }
+                driveMotors.Move(
+                    yPosX,
+                    yPosY,
+                    yPosHeading
+                );
             }
+
+            // aim at angle for far goal when respective button pressed
             else if (gamepad1.b) {
                 driveMotors.DriveAndAim(
                     rotatedX,
                     rotatedY,
-                    (headingOffset * 180 / Math.PI) -90+19
+                    (headingOffset * 180 / Math.PI) - 90 + 19
                 );
             }
+
+            // drive normally when keybinds aren't in use
             else {
+                // Set the power of the wheels based off the new joystick coordinates
+                // y+x+stick <- [-1,1]
                 driveMotors.DriveWithPower(
                     ( rotatedY + rotatedX + ( turnPower )) * maxSpeed, // Back left
                     ( rotatedY - rotatedX + ( turnPower )) * maxSpeed, // Front left
