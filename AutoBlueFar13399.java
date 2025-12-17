@@ -41,6 +41,29 @@ public class AutoBlueFar13399 extends Auto {
             new StopIntake(this),
             new StopPusher(this)
         };
+
+        Action[] humanPlayerGrabSequence = {
+            // Move to human player zone
+            new Move(this, 100, 300, -90),
+
+            // Get ready to grab
+            new CloseStopper(this),
+            new SpinIntake(this),
+            new SpinPusher(this),
+
+            // Try grabbing
+            new Move(this, 100, 1100, -110),
+            new Wait(this, 250),
+
+            // Try grabbing some more
+            new Move(this, 100, 850, -110),
+            new Move(this, 100, 1100, -110),
+            new Wait(this, 250),
+
+            // Turn off intake
+            new StopPusher(this),
+            new StopIntake(this),
+        }
         
         Action[] actions = {
             // ======================= AUTO START ======================= //
@@ -62,21 +85,13 @@ public class AutoBlueFar13399 extends Auto {
             
             new ActionSequence(this, launchSequence),
 
-            // Move to human player zone
-            new Move(this, 100, 300, -90),
+            new ActionSequence(this, humanPlayerGrabSequence),
+            new ActionSequence(this, launchSequence),
 
-            // Intake artifacts
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this),
-            new Move(this, 100, 1100, -110),
-            new Wait(this, 250),
-            new Move(this, 100, 850, -110),
-            new Move(this, 100, 1100, -110),
-            new Wait(this, 250),
-            new StopPusher(this),
-            new StopIntake(this),
-            
+            new ActionSequence(this, humanPlayerGrabSequence),
+            new ActionSequence(this, launchSequence),
+
+            new ActionSequence(this, humanPlayerGrabSequence),
             new ActionSequence(this, launchSequence),
             
             // End sequence
