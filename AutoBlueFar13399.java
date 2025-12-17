@@ -43,7 +43,7 @@ public class AutoBlueFar13399 extends Auto {
         };
 
         Action[] humanPlayerGrabSequence = {
-            // Move to human player zone
+            // Move in front of the human player zone
             new Move(this, 100, 300, -90),
 
             // Get ready to grab
