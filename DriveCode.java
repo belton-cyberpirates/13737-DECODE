@@ -127,9 +127,9 @@ public class DriveCode extends LinearOpMode {
             // aim at angle for far goal when respective button pressed
             else if (gamepad1.b) {
                 driveMotors.DriveAndAim(
-                    rotatedX,
                     rotatedY,
-                    (headingOffset * 180 / Math.PI) - 90 + 19
+                    rotatedX,
+                    headingOffset + 1.25
                 );
             }
 
@@ -179,11 +179,11 @@ public class DriveCode extends LinearOpMode {
             
             // Telemetry
             telemetry.addData("headingOffset", headingOffset);
-                    
+            
             telemetry.addData("x", aPosX);
             telemetry.addData("y", aPosY);
             telemetry.addData("h", aPosHeading);
-
+            
             telemetry.update();
         }
     }
