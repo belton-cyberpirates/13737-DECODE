@@ -183,16 +183,13 @@ public class DriveMotors {
     public void DriveAndAim(double forward, double strafe, double targetAngle) {
         this.state = states.POWER;
         double anglePower = imuPidController.PIDControlRadians(targetAngle, this.heading, deltaTime);
-
-        double backLeftPower   = (-forward - strafe + anglePower);
-        double frontLeftPower  = ( forward - strafe + anglePower);
-        double frontRightPower = ( forward + strafe + anglePower);
-        double backRightPower  = (-forward + strafe + anglePower);
-
-        backLeft.setPower(backLeftPower);
-        frontLeft.setPower(frontLeftPower);
-        frontRight.setPower(frontRightPower);
-        backRight.setPower(backRightPower);
+        
+        DriveWithPower(
+            ( forward + strafe + ( anglePower )), // Back left
+            ( forward - strafe + ( anglePower )), // Front left
+            (-forward - strafe + ( anglePower )), // Front right
+            (-forward + strafe + ( anglePower ))  // Back right
+        );
     }
 
 
@@ -288,6 +285,12 @@ public class DriveMotors {
         this.odometryTimer.reset();
 
         this.state = states.ODOMETRY;
+    }
+
+
+    public void Move(double xPos, double yPos, double heading, double mult) {
+        // mult things :|
+        Move(xPos, yPos, heading);
     }
 
 
