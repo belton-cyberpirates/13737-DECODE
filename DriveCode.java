@@ -37,6 +37,7 @@ public class DriveCode extends LinearOpMode {
     double yPosX = 0;
     double yPosY = 0;
     double yPosHeading = 0;
+    boolean prevY = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -95,11 +96,6 @@ public class DriveCode extends LinearOpMode {
                 xPosY = driveMotors.GetY();
                 xPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
             }
-            else if (gamepad1.dpad_up) {
-                yPosX = driveMotors.GetX();
-                yPosY = driveMotors.GetY();
-                yPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
-            }
 
             // track pin locations when respective buttons are being pressed
             if (gamepad1.a) {
@@ -117,6 +113,11 @@ public class DriveCode extends LinearOpMode {
                 );
             }
             else if (gamepad1.y) {
+                if (!prevY) {
+                    yPosX = driveMotors.GetX();
+                    yPosY = driveMotors.GetY();
+                    yPosHeading = -driveMotors.GetHeading() * 180 / Math.PI;
+                }
                 driveMotors.Move(
                     yPosX,
                     yPosY,
@@ -144,6 +145,8 @@ public class DriveCode extends LinearOpMode {
                     (-rotatedY + rotatedX + ( turnPower )) * maxSpeed  // Back right
                 );
             }
+            
+            prevY = gamepad1.y;
             
             // P2 variables
             double leftStickYGP2 = gamepad2.left_stick_y;
