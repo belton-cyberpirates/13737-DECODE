@@ -367,4 +367,14 @@ public class DriveMotors {
     public double GetHeading() {
         return heading;
     }
+    
+    
+    public double GetHeading(AngleUnit angleUnit) {
+        switch(angleUnit) {
+            case AngleUnit.DEGREES:
+                return heading * 180 / Math.PI;
+        }
+        
+        return heading;
+    }
 }
