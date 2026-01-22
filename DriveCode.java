@@ -153,10 +153,15 @@ public class DriveCode extends LinearOpMode {
             double rightStickYGP2 = gamepad2.right_stick_y;
             
             // Intake
-            intake.SetPower(leftStickYGP2 < 0 ? -leftStickYGP2 : -leftStickYGP2 / 3);
+            intake.SetPower(leftStickYGP2 < 0 ? leftStickYGP2 : leftStickYGP2 / 3);
             
             // Pusher
-            intake.SetPusherPower(gamepad2.dpad_down ? .4 : -leftStickYGP2 / 1.5);
+            if (launcher.isAtVelocity() || launcher.launcherTargetVelocity < 1200 || !gamepad2.right_trigger > 0) {
+                intake.SetPusherPower(gamepad2.dpad_down ? .4 : -leftStickYGP2); // / 1.5);
+            }
+            else {
+                intake.SetPusherPower(0);
+            }
             
             // Stopper
             intake.SetStopper(gamepad2.dpad_down || gamepad2.right_trigger > 0.5);
