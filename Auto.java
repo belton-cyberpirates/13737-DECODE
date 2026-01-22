@@ -13,6 +13,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import org.firstinspires.ftc.teamcode.BotConfig;
 import org.firstinspires.ftc.teamcode.DriveMotors;
+import org.firstinspires.ftc.teamcode.Launcher;
+import org.firstinspires.ftc.teamcode.AutoTeleopData;
 
 
 public abstract class Auto extends LinearOpMode {
