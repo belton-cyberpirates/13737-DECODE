@@ -156,7 +156,7 @@ public class DriveCode extends LinearOpMode {
             intake.SetPower(leftStickYGP2 < 0 ? leftStickYGP2 : leftStickYGP2 / 3);
             
             // Pusher
-            if (launcher.isAtVelocity() || launcher.launcherTargetVelocity < 1200 || !gamepad2.right_trigger > 0) {
+            if (launcher.isAtVelocity() || launcher.launcherTargetVelocity < 1200 || gamepad2.right_trigger == 0) {
                 intake.SetPusherPower(gamepad2.dpad_down ? .4 : -leftStickYGP2); // / 1.5);
             }
             else {
