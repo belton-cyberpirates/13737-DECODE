@@ -46,7 +46,9 @@ public class PIDFController {
         this.lastError = error;
         this.integralSum += error * delta;
 
-        double output = (error * this.Kp) + (derivative * this.Kd) + (this.integralSum * this.Ki);
+        double output = (this.Kp * error) + 
+                        (this.Ki * this.integralSum) + 
+                        (this.Kd * derivative);
         
         lastOutput = output;
         return output + (Kf * reference);
