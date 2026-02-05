@@ -58,7 +58,7 @@ public class AutoBlueFar13399 extends Auto {
             // Try grabbing some more
             new Move(this, 100, 850, -110, 1, 0.5),
             new Move(this, 100, 1150, -110, 1, 0.75)
-        }
+        };
         
         Action[] actions = {
             // ======================= AUTO START ======================= //
