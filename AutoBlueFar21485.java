@@ -8,9 +8,9 @@ import org.firstinspires.ftc.teamcode.BotConfig;
 import org.firstinspires.ftc.teamcode.Auto;
 
 
-@Autonomous(name = "Blue Far - w/ 21485"/*, preselectTeleOp="Your Drive Code Here"*/, group="blue")
+@Autonomous(name = "Blue Far - w/ 13399"/*, preselectTeleOp="Your Drive Code Here"*/, group="blue")
 //@Disabled
-public class AutoBlueFar13399_Copy extends Auto {
+public class AutoBlueFar13399 extends Auto {
 
     public Action[] getActions() {
         
@@ -41,110 +41,42 @@ public class AutoBlueFar13399_Copy extends Auto {
             new StopIntake(this),
             new StopPusher(this)
         };
+
+
+        Action[] humanGrabSequence = {
+            // Move in front of the human player zone
+            new Move(this, 300, 300, -100),
+
+            // Get ready to grab
+            new CloseStopper(this),
+            new SpinIntake(this),
+            new SpinPusher(this),
+
+            // Try grabbing
+            new Move(this, 100, 1150, -110, 1, 1),
+
+            // Try grabbing some more
+            new Move(this, 100, 850, -110, 1, 0.5),
+            new Move(this, 100, 1150, -110, 1, 0.75)
+        }
         
         Action[] actions = {
             // ======================= AUTO START ======================= //
             
             // Launch!
             new ActionSequence(this, launchSequence),
-            
-            // // Move to first line
-            // new Move(this, 680, 300, -90),
 
-            // // Intake artifacts
-            // new CloseStopper(this),
-            // new SpinIntake(this),
-            // new SpinPusher(this), 
-            // new Move(this, 680, 1100, -90),
-            // new StopPusher(this),
-            // new StopIntake(this),
-            
-            // new ActionSequence(this, launchSequence),
-
-            // Move in front of the human player zone
-            new Move(this, 300, 300, -100),
-
-            // Get ready to grab
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this),
-
-            // Try grabbing
-            new Move(this, 100, 1150, -110, 1, 1),
-
-            // Try grabbing some more
-            new Move(this, 100, 850, -110, 1, 0.5),
-            new Move(this, 100, 1150, -110, 1, 0.75),
-
-            // Turn off intake
-            new StopPusher(this),
-            new StopIntake(this),
-            
-            new ActionSequence(this, launchSequence),
-            
-            // Move in front of the human player zone
-            new Move(this, 300, 300, -100),
-
-            // Get ready to grab
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this),
-
-            // Try grabbing
-            new Move(this, 300, 1150, -110, 1, 1),
-
-            // Try grabbing some more
-            new Move(this, 100, 850, -110, 1, 0.5),
-            new Move(this, 100, 1150, -110, 1, 0.75),
-
-            // // Try grabbing
-            // new Move(this, 600, 1120, -65, 1, 1),
-
-            // // Try grabbing some more
-            // new Move(this, 400, 850, -65, 1, 0.5),
-            // new Move(this, 600, 1120, -65, 1, 0.5),
-
-            // Turn off intake
-            new StopPusher(this),
-            new StopIntake(this),
-            
+            new ActionSequence(humanGrabSequence),
             new ActionSequence(this, launchSequence),
 
-            // Move in front of the human player zone
-            new Move(this, 300, 300, -100),
-
-            // Get ready to grab
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this),
-
-            // Try grabbing
-            new Move(this, 100, 1150, -110, 1, 1),
-
-            // Try grabbing some more
-            new Move(this, 100, 850, -110, 1, 0.5),
-            new Move(this, 100, 1150, -110, 1, 0.75),
-
-            // Turn off intake
-            new StopPusher(this),
-            new StopIntake(this),
-            
+            new ActionSequence(humanGrabSequence),
             new ActionSequence(this, launchSequence),
-            
-            // Move in front of the human player zone
-            new Move(this, 300, 300, -100),
 
-            // Get ready to grab
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this),
+            new ActionSequence(humanGrabSequence),
+            new ActionSequence(this, launchSequence),
 
-            // Try grabbing
-            new Move(this, 300, 1150, -110, 1, 1),
-
-            // Try grabbing some more
-            new Move(this, 100, 850, -110, 1, 0.5),
-            new Move(this, 100, 1150, -110, 1, 0.75),
+            new ActionSequence(humanGrabSequence),
+            new ActionSequence(this, launchSequence),
             
             // End sequence
             // Move out of triangle

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Auto;
 
 @Autonomous(name = "Blue Far - w/ 13399"/*, preselectTeleOp="Your Drive Code Here"*/, group="blue")
 //@Disabled
-public class AutoBlueFar13399 extends Auto {
+public class AutoRedFar21485 extends Auto {
 
     public Action[] getActions() {
         
@@ -20,7 +20,7 @@ public class AutoBlueFar13399 extends Auto {
             new SpinLauncherFast(this),
             
             // Move to shooting position
-            new Move(this, 180, 0, -90-24.5),
+            new Move(this, 180, 80, -90+19),
             
             // Launch!
             new WaitForLauncher(this),
@@ -45,7 +45,7 @@ public class AutoBlueFar13399 extends Auto {
 
         Action[] humanGrabSequence = {
             // Move in front of the human player zone
-            new Move(this, 300, 300, -100),
+            new Move(this, 300, -300, 100),
 
             // Get ready to grab
             new CloseStopper(this),
@@ -53,11 +53,11 @@ public class AutoBlueFar13399 extends Auto {
             new SpinPusher(this),
 
             // Try grabbing
-            new Move(this, 100, 1150, -110, 1, 1),
+            new Move(this, 100, -1150, 110, 1, 1),
 
             // Try grabbing some more
-            new Move(this, 100, 850, -110, 1, 0.5),
-            new Move(this, 100, 1150, -110, 1, 0.75)
+            new Move(this, 100, -850, 110, 1, 0.5),
+            new Move(this, 100, -1150, 110, 1, 0.75)
         }
         
         Action[] actions = {
@@ -65,35 +65,19 @@ public class AutoBlueFar13399 extends Auto {
             
             // Launch!
             new ActionSequence(this, launchSequence),
-            
-            // Move to first line
-            new Move(this, 680, 300, -90),
 
-            // Intake artifacts
-            new CloseStopper(this),
-            new SpinIntake(this),
-            new SpinPusher(this), 
-            new Move(this, 680, 1100, -90),
-            new StopPusher(this),
-            new StopIntake(this),
-            
+            new ActionSequence(humanGrabSequence),
             new ActionSequence(this, launchSequence),
 
             new ActionSequence(humanGrabSequence),
-            
             new ActionSequence(this, launchSequence),
 
             new ActionSequence(humanGrabSequence),
-            
-            new ActionSequence(this, launchSequence),
-
-            new ActionSequence(humanGrabSequence),
-            
             new ActionSequence(this, launchSequence),
             
             // End sequence
             // Move out of triangle
-            new Move(this, 50, 500, -90),
+            new Move(this, 50, -500, 90),
             
             // ======================== AUTO END ======================== //
         };
