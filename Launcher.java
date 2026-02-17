@@ -28,6 +28,7 @@ public class Launcher {
         this.auto = auto;
         
         this.launcher = auto.hardwareMap.get(DcMotorEx.class, BotConfig.LAUNCHER_NAME);
+        this.launcher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
     
     
@@ -36,13 +37,18 @@ public class Launcher {
         
         double launcherVelocity = launcher.getVelocity();
 
-        launcher.setPower(
-            launcherPIDFController.PIDFControl(
-                this.launcherTargetVelocity,
-                launcherVelocity,
-                deltaTime
-            )
-        );
+        if (this.launcherTargetVelocity != 0) {
+            launcher.setPower(
+                launcherPIDFController.PIDFControl(
+                    this.launcherTargetVelocity,
+                    launcherVelocity,
+                    deltaTime
+                )
+            );
+        }
+        else {
+            launcher.setPower(0);
+        }
         
         deltaTimer.reset();
         
