@@ -25,6 +25,8 @@ public class Intake {
         this.intake = auto.hardwareMap.get(DcMotorEx.class, BotConfig.INTAKE_NAME);
         this.pusher = auto.hardwareMap.get(DcMotorEx.class, BotConfig.PUSHER_NAME);
         this.stopper = auto.hardwareMap.get(Servo.class, BotConfig.STOPPER_NAME);
+        
+        this.intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 
