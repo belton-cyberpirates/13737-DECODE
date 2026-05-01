@@ -19,9 +19,6 @@ public class DriveCode extends LinearOpMode {
     DriveMotors driveMotors;
     Intake intake;
     Launcher launcher;
-
-    // Other Hardware Objects
-    Servo light;
     
     // Vars
     double headingOffset = 0;
@@ -41,12 +38,11 @@ public class DriveCode extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        telemetry.setMsTransmissionInterval(50);
         
         driveMotors = new DriveMotors(this);
         intake = new Intake(this);
         launcher = new Launcher(this);
-        
-        light = hardwareMap.get(Servo.class, BotConfig.LIGHT_NAME);
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -156,8 +152,9 @@ public class DriveCode extends LinearOpMode {
             intake.SetPower(leftStickYGP2 < 0 ? leftStickYGP2 : leftStickYGP2 / 3);
             
             // Pusher
-            if (launcher.isAtVelocity() || launcher.launcherTargetVelocity < 1200 || gamepad2.right_trigger == 0) {
-                intake.SetPusherPower(gamepad2.dpad_down ? .4 : -leftStickYGP2); // / 1.5);
+            boolean safe = gamepad2.left_trigger > 0 || gamepad2.left_bumper;
+            if (launcher.isAtVelocity() || launcher.launcherTargetVelocity < 1100 || gamepad2.right_trigger == 0 || !safe) {
+                intake.SetPusherPower(gamepad2.dpad_down ? .6 : -leftStickYGP2);
             }
             else {
                 intake.SetPusherPower(0);
@@ -177,13 +174,7 @@ public class DriveCode extends LinearOpMode {
                 launcher.SetVelocity(BotConfig.LAUNCHER_PASSIVE_VELOCITY);
             }
             
-            // Light
-            light.setPosition(
-                launcher.isAtVelocity() ? 
-                    BotConfig.LIGHT_GREEN
-                :
-                    BotConfig.LIGHT_RED
-            );
+            launcher.safe = safe;
             
             // Telemetry
             telemetry.addData("headingOffset", headingOffset);

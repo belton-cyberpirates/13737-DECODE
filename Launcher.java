@@ -15,11 +15,14 @@ public class Launcher {
 
     private LinearOpMode auto;
 
-    public DcMotorEx launcher;
-    
-    PIDFController launcherPIDFController = new PIDFController(0.0004, 0.025, 0/*.00001*/, 0/*.0001*/);
+    public DcMotorEx launcherLeft;
+    public DcMotorEx launcherRight;
+    Servo light;
+
+    PIDFController launcherPIDFController = new PIDFController(0.0004, .015, 0/*.00001*/, 0/*.0001*/);
 
     int launcherTargetVelocity = 0;
+    boolean safe = false;
 
     ElapsedTime deltaTimer = new ElapsedTime();
 
@@ -27,34 +30,53 @@ public class Launcher {
     public Launcher(LinearOpMode auto) {
         this.auto = auto;
         
-        this.launcher = auto.hardwareMap.get(DcMotorEx.class, BotConfig.LAUNCHER_NAME);
-        this.launcher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.launcherLeft = auto.hardwareMap.get(DcMotorEx.class, BotConfig.LAUNCHER_LEFT_NAME);
+        this.launcherRight = auto.hardwareMap.get(DcMotorEx.class, BotConfig.LAUNCHER_RIGHT_NAME);
+        
+        this.launcherLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.launcherRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    
+        this.light = auto.hardwareMap.get(Servo.class, BotConfig.LIGHT_NAME);
     }
     
     
     public double process() {
         double deltaTime = deltaTimer.seconds();
         
-        double launcherVelocity = launcher.getVelocity();
+        double launcherVelocity = launcherLeft.getVelocity();
 
         if (this.launcherTargetVelocity != 0) {
-            launcher.setPower(
-                launcherPIDFController.PIDFControl(
-                    this.launcherTargetVelocity,
-                    launcherVelocity,
-                    deltaTime
-                )
+            double launcherPower = launcherPIDFController.PIDFControl(
+                this.launcherTargetVelocity,
+                launcherVelocity,
+                deltaTime
             );
+            
+            launcherLeft.setPower(launcherPower);
+            launcherRight.setPower(-launcherPower);
         }
         else {
-            launcher.setPower(0);
+            launcherLeft.setPower(0);
+            launcherRight.setPower(0);
         }
         
         deltaTimer.reset();
         
+        // Light
+        if (this.safe) {
+            light.setPosition(BotConfig.LIGHT_BLUE);
+        }
+        else if (this.isAtVelocity()) {
+            light.setPosition(BotConfig.LIGHT_GREEN);
+        }
+        else {
+            light.setPosition(BotConfig.LIGHT_RED);
+        }
+        
         // Telemetry
         auto.telemetry.addData("Launcher Velocity", getVelocity());
         auto.telemetry.addData("Launcher Target Velocity", launcherTargetVelocity);
+        auto.telemetry.addData("Launcher Is At Velocity", isAtVelocity());
         auto.telemetry.addData("Launcher Power", launcherPIDFController.lastOutput);
         
         return deltaTime;
@@ -72,11 +94,11 @@ public class Launcher {
 
 
     public boolean isAtVelocity() {
-        return launcherPIDFController.lastError <= 50;
+        return Math.abs(launcherPIDFController.lastError) <= BotConfig.LAUNCHER_VELOCITY_MARGIN;
     }
     
 
     public int getVelocity() {
-        return (int)launcher.getVelocity();
+        return (int)launcherLeft.getVelocity();
     }
 }
