@@ -14,7 +14,8 @@ public class BotConfig {
   public static final String PUSHER_NAME = "pusher";
   public static final String STOPPER_NAME = "stopper";
 
-  public static final String LAUNCHER_NAME = "flywheel";
+  public static final String LAUNCHER_LEFT_NAME = "flywheel_left";
+  public static final String LAUNCHER_RIGHT_NAME = "flywheel_right";
 
   public static final String LIGHT_NAME = "light";
   // ---------------------------------------------------------------------------
@@ -41,8 +42,9 @@ public class BotConfig {
   public static final int LAUNCHER_VELOCITY = 1300;
   public static final int LAUNCHER_FAR_VELOCITY = 1600;
   
+  public static final double LIGHT_BLUE = 0.611;
   public static final double LIGHT_GREEN = 0.472;
-  public static final double LIGHT_RED = 0.277;
+  public static final double LIGHT_RED = 0.3;
   // ---------------------------------------------------------------------------
 
 
@@ -50,7 +52,7 @@ public class BotConfig {
   ** AUTO CALIBRATION CONSTANTS
   *****************************************************************************/
   public static final int AUTO_DRIVE_VELOCITY = 1000;
-  public static final int AUTO_PUSHER_VELOCITY = 700;
+  public static final int AUTO_PUSHER_VELOCITY = 7000;
   public static final int AUTO_INTAKE_VELOCITY = -2500;
   public static final int AUTO_LAUNCHER_VELOCITY = 1300;
   // ---------------------------------------------------------------------------
@@ -67,7 +69,7 @@ public class BotConfig {
   /*****************************************************************************
   ** INTAKE CONSTANTS
   *****************************************************************************/
-  public static final double STOPPER_OPEN_POS = 0.075;
+  public static final double STOPPER_OPEN_POS = 0.0;
   public static final double STOPPER_CLOSE_POS = 0.25;
   // ---------------------------------------------------------------------------
 
@@ -75,7 +77,7 @@ public class BotConfig {
   /*****************************************************************************
   ** LAUNCHER CONSTANTS
   *****************************************************************************/
-  public static final int LAUNCHER_VELOCITY_MARGIN = 40;
+  public static final int LAUNCHER_VELOCITY_MARGIN = 50;
   // ---------------------------------------------------------------------------
 
 
